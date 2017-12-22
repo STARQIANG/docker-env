@@ -1,0 +1,29 @@
+h1 {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 18px;
+}
+.tab .content-wrap {
+  padding-top: 5px;
+}
+.tab {
+  padding: 5px;
+}
+.tab .tab-nav {
+  width: 100%;
+}
+.tab .tab-nav li {
+  width: 20%;
+  margin-right: 0px;
+}
+.tab .tab-nav li a {
+  height: auto;
+  line-height: normal;
+  padding: 5px;
+  font-size: 12px;
+}
+.content-item a {
+  margin: .5em;
+  padding: .5em;
+  font-size: 14px;
+}

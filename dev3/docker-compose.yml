@@ -1,0 +1,63 @@
+version: '2.2'
+
+services:
+  mysql:
+    image: mysql:5.6
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/dev3/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - /var/lib/dev3/mysql/initdb:/docker-entrypoint-initdb.d
+      - /var/lib/dev3/mysql/data:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    restart: always
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "3307:8080"
+  redis:
+    image: docker.io/redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    command: redis-server
+  zookeeper:
+    image: zookeeper
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+  dubbo-admin:
+    image: changwentao/dubboadmin:latest
+    container_name: dubbo-admin
+    restart: always
+    ports:
+      - "9050:8080"
+    links:
+      - zookeeper:zookeeper
+    depends_on:
+      - zookeeper
+  postgres:
+    image: postgres:9.6
+    container_name: postgres
+    volumes:
+      - /var/lib/dev3/postgres/data:/var/lib/postgresql/data
+      - /var/lib/dev3/postgres/initdb:/docker-entrypoint-initdb.d
+      - /var/lib/dev3/postgres/conf/postgresql.conf:/etc/postgresql/postgresql.conf
+      - /var/lib/dev3/postgres/conf/pg_hba.conf:/etc/postgresql/pg_hba.conf
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123456
+    command: "postgres -c config_file=/etc/postgresql/postgresql.conf"
+
+
+
+

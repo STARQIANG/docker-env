@@ -1,0 +1,53 @@
+version: '2.2'
+
+services:
+  jenkins:
+    image:  jenkins
+    container_name: jenkins
+    dns:
+      - 114.114.114.114
+    ports:
+      - "8080:8080"
+    user: root
+    mem_limit: 5G
+    memswap_limit: 5G
+    cpu_count: 4
+    cpu_quota: 400000
+    blkio_config:
+      weight: 300
+      device_read_bps:
+        - path: /dev/sdb
+          rate: '12mb'
+      device_read_iops:
+        - path: /dev/sdb
+          rate: 120
+      device_write_bps:
+        - path: /dev/sdb
+          rate: '1024k'
+      device_write_iops:
+        - path: /dev/sdb
+          rate: 30
+    volumes:
+      - /var/lib/jenkins_dev/home:/var/jenkins_home
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+  jenkins_node:
+    image:  registry.cn-beijing.aliyuncs.com/yangzhenwei/centos7-maven:0.3
+    container_name: jenkins_node
+    dns:
+      - 114.114.114.114
+    ports:
+      - "50022:22"
+    volumes:
+      - /var/lib/jenkins_dev/maven/repository:/root/.m2/repository
+      - /var/lib/jenkins_dev/maven:/usr/share/maven/conf
+      - /var/lib/jenkins_dev/gradle:/root/.gradle
+      - /root/service:/root/service
+      - /etc/localtime:/etc/localtime:ro
+    command: /usr/bin/supervisord
+    restart: always
+
+
+
+
+

@@ -1,0 +1,179 @@
+# List of pipelines to be loaded by Logstash
+#
+# This document must be a list of dictionaries/hashes, where the keys/values are pipeline settings.
+# Default values for ommitted settings are read from the `logstash.yml` file.
+# When declaring multiple pipelines, each MUST have its own `pipeline.id`.
+#
+# Example of two pipelines:
+#
+# - pipeline.id: test
+#   pipeline.workers: 1
+#   pipeline.batch.size: 1
+#   config.string: "input { generator {} } filter { sleep { time => 1 } } output { stdout { codec => dots } }"
+# - pipeline.id: another_test
+#   queue.type: persisted
+#   path.config: "/tmp/logstash/*.config"
+#
+# Available options:
+#
+#   # name of the pipeline
+- pipeline.id: mylogs
+#
+#   # The configuration string to be used by this pipeline
+#   config.string: "input { generator {} } filter { sleep { time => 1 } } output { stdout { codec => dots } }"
+#
+#   # The path from where to read the configuration text
+#   path.config: "/etc/conf.d/logstash/myconfig.cfg"
+#
+#
+# 设置并行执行filters+outputs的线程数量,默认是当前机器cpu的核数
+#
+# pipeline.workers: 1
+#
+#
+# 每个output plugin实例使用线程数
+#
+# pipeline.output.workers: 1
+#
+# 收集多少个inputs事件一并发送给filters线程
+#
+# pipeline.batch.size: 125
+#
+# 等待多少毫秒发送一批inputs事件到filters线程
+#
+# pipeline.batch.delay: 5
+#
+#
+# 是否强制关闭Logstash即使还有inputs事件在内存中。默认logstash将拒绝关闭直到
+# 所有的inputs事件发送到outputs
+#
+# WARNING: enabling this can lead to data loss during shutdown
+#
+# pipeline.unsafe_shutdown: false
+#
+# ------------ Pipeline Configuration Settings --------------
+#
+# pipeline配置文件的路径
+#
+path.config: /usr/share/logstash/pipeline
+#
+# Pipeline configuration string for the main pipeline
+#
+# config.string:
+#
+# 测试Pipeline配置文件是否配置正确,不会真正运行程序
+#
+# config.test_and_exit: false
+#
+#
+#  是否周期性的检查Pipeline配置文件是否更改并加载新的配置P.通过SIGHUP信号也能手动触发
+#
+# config.reload.automatic: false
+#
+# 检查Pipeline配置文件的频率 单位是秒
+#
+# config.reload.interval: 3s
+#
+# Show fully compiled configuration as debug log message
+# NOTE: --log.level must be 'debug'
+#
+# config.debug: false
+#
+# When enabled, process escaped characters such as \n and \" in strings in the
+# pipeline configuration files.
+#
+# config.support_escapes: false
+#
+# ------------ Module Settings ---------------
+# Define modules here.  Modules definitions must be defined as an array.
+# The simple way to see this is to prepend each `name` with a `-`, and keep
+# all associated variables under the `name` they are associated with, and
+# above the next, like this:
+#
+# modules:
+#   - name: MODULE_NAME
+#     var.PLUGINTYPE1.PLUGINNAME1.KEY1: VALUE
+#     var.PLUGINTYPE1.PLUGINNAME1.KEY2: VALUE
+#     var.PLUGINTYPE2.PLUGINNAME1.KEY1: VALUE
+#     var.PLUGINTYPE3.PLUGINNAME3.KEY1: VALUE
+#
+# Module variable names must be in the format of
+#
+# var.PLUGIN_TYPE.PLUGIN_NAME.KEY
+#
+# modules:
+#
+# ------------ Cloud Settings ---------------
+# Define Elastic Cloud settings here.
+# Format of cloud.id is a base64 value e.g. dXMtZWFzdC0xLmF3cy5mb3VuZC5pbyRub3RhcmVhbCRpZGVudGlmaWVy
+# and it may have an label prefix e.g. staging:dXMtZ...
+# This will overwrite 'var.elasticsearch.hosts' and 'var.kibana.host'
+# cloud.id: <identifier>
+#
+# Format of cloud.auth is: <user>:<pass>
+# This is optional
+# If supplied this will overwrite 'var.elasticsearch.username' and 'var.elasticsearch.password'
+# If supplied this will overwrite 'var.kibana.username' and 'var.kibana.password'
+# cloud.auth: elastic:<password>
+#
+# ------------ Queuing Settings --------------
+#
+# Internal queuing model, "memory" for legacy in-memory based queuing and
+# "persisted" for disk-based acked queueing. Defaults is memory
+#
+queue.type: memory
+#
+# If using queue.type: persisted, the directory path where the data files will be stored.
+# Default is path.data/queue
+#
+# path.queue:
+#
+# If using queue.type: persisted, the page data files size. The queue data consists of
+# append-only data files separated into pages. Default is 250mb
+#
+# queue.page_capacity: 250mb
+#
+# If using queue.type: persisted, the maximum number of unread events in the queue.
+# Default is 0 (unlimited)
+#
+# queue.max_events: 0
+#
+# If using queue.type: persisted, the total capacity of the queue in number of bytes.
+# If you would like more unacked events to be buffered in Logstash, you can increase the
+# capacity using this setting. Please make sure your disk drive has capacity greater than
+# the size specified here. If both max_bytes and max_events are specified, Logstash will pick
+# whichever criteria is reached first
+# Default is 1024mb or 1gb
+#
+# queue.max_bytes: 1024mb
+#
+# If using queue.type: persisted, the maximum number of acked events before forcing a checkpoint
+# Default is 1024, 0 for unlimited
+#
+# queue.checkpoint.acks: 1024
+#
+# If using queue.type: persisted, the maximum number of written events before forcing a checkpoint
+# Default is 1024, 0 for unlimited
+#
+# queue.checkpoint.writes: 1024
+#
+# If using queue.type: persisted, the interval in milliseconds when a checkpoint is forced on the head page
+# Default is 1000, 0 for no periodic checkpoint.
+#
+# queue.checkpoint.interval: 1000
+#
+# ------------ Dead-Letter Queue Settings --------------
+# Flag to turn on dead-letter queue.
+#
+# dead_letter_queue.enable: false
+
+# If using dead_letter_queue.enable: true, the maximum size of each dead letter queue. Entries
+# will be dropped if they would increase the size of the dead letter queue beyond this setting.
+# Default is 1024mb
+# dead_letter_queue.max_bytes: 1024mb
+
+# If using dead_letter_queue.enable: true, the directory path where the data files will be stored.
+# Default is path.data/dead_letter_queue
+#
+# path.dead_letter_queue:
+#
