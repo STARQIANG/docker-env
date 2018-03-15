@@ -30,6 +30,9 @@ services:
     volumes:
       - /var/lib/jenkins_dev/home:/var/jenkins_home
       - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/lib64/libltdl.so.7:/usr/lib64/libltdl.so.7:ro
     restart: always
   jenkins_node:
     image:  registry.cn-beijing.aliyuncs.com/yangzhenwei/centos7-maven:0.3
@@ -44,6 +47,9 @@ services:
       - /var/lib/jenkins_dev/gradle:/root/.gradle
       - /root/service:/root/service
       - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /usr/bin/docker:/usr/bin/docker
+      - /usr/lib64/libltdl.so.7:/usr/lib64/libltdl.so.7:ro
     command: /usr/bin/supervisord
     restart: always
 

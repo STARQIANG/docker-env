@@ -1,0 +1,31 @@
+version: '3.3'
+
+configs:
+  filebeat-conf:
+    file: ./filebeat/filebeat.yml
+volumes:
+  filebeatData:
+    driver: local
+services:
+  filebeat-elk:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
+    hostname: log
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints:
+          - node.hostname == log
+    volumes:
+      - /root/logs:/root/logs
+      - filebeatData:/usr/share/filebeat/data
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "filebeat"
+    configs:
+      - source: filebeat-conf
+        target: /usr/share/filebeat/filebeat.yml

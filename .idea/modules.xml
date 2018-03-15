@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/jenkins_env.iml" filepath="$PROJECT_DIR$/.idea/jenkins_env.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../zhongjiaxin_env/.idea/zhongjiaxin_env.iml" filepath="$PROJECT_DIR$/../zhongjiaxin_env/.idea/zhongjiaxin_env.iml" />
     </modules>
   </component>
 </project>

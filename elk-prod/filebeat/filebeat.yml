@@ -1,0 +1,68 @@
+filebeat.prospectors:
+
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/nginx-proxy/*.log
+    - /root/logs/nginx-prod/*.log
+  fields:
+    flag: nginx
+    mode: syslog
+#- type: log
+#  enabled: true
+#  paths:
+#    - /root/logs/filebeat/*.log
+#  fields:
+#    flag: filebeat
+#    mode: syslog
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/kafka/*.log
+  multiline.pattern: '^\[\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
+  multiline.negate: true
+  multiline.match: after
+  fields:
+    flag: kafka
+    mode: syslog
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/zookeeper/*.log
+  multiline.pattern: '^\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
+  multiline.negate: true
+  multiline.match: after
+  fields:
+    flag: zookeeper
+    mode: syslog
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/redis/*.log
+    - /root/logs/redis-sentinel/*.log
+  multiline.pattern: '^\d+:'
+  multiline.negate: true
+  multiline.match: after
+  fields:
+    flag: redis
+    mode: syslog
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/kafka-log/*.log
+  multiline.pattern: '^\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
+  multiline.negate: true
+  multiline.match: after
+  tags: ["tomcat"]
+  fields:
+    flag: tomcat
+    mode: syslog
+output.kafka:
+  hosts: ["10.0.8.112:9092", "10.0.8.113:9092", "10.0.8.114:9092"]
+  topic: 'log'
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+logging.level: info

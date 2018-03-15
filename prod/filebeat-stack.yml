@@ -1,0 +1,53 @@
+version: '3.3'
+
+configs:
+  filebeat-conf:
+    file: ./filebeat/filebeat.yml
+volumes:
+  filebeatData:
+    driver: local
+services:
+  filebeat-prod1:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
+    hostname: 准生产prod1
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints:
+          - node.hostname == prod1
+    volumes:
+      - /root/logs:/root/logs
+      - filebeatData:/usr/share/filebeat/data
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "filebeat"
+    configs:
+      - source: filebeat-conf
+        target: /usr/share/filebeat/filebeat.yml
+  filebeat-prod2:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
+    hostname: 准生产prod2
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints:
+          - node.hostname == prod2
+    volumes:
+      - /root/logs:/root/logs
+      - filebeatData:/usr/share/filebeat/data
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "filebeat"
+    configs:
+      - source: filebeat-conf
+        target: /usr/share/filebeat/filebeat.yml

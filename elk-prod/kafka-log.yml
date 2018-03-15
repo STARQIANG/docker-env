@@ -1,0 +1,23 @@
+version: '3.3'
+
+
+services:
+  kafka-log:
+    image: reg.zhongjiaxin.com/library/kafka-log:latest
+    hostname: kafka-log
+    environment:
+      JAVA_OPTS: -Xms2g -Xmx2g
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '2'
+          memory: 3072M
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "kafka-log"

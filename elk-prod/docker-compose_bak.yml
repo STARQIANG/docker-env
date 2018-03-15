@@ -1,0 +1,146 @@
+version: '3.3'
+
+volumes:
+  esdata3:
+    driver: local
+networks:
+  esnet:
+    driver: overlay
+configs:
+  logstash-conf:
+    file: ./logstash/logstash.conf
+#  es_proxy_config:
+#    file: ./es_proxy/nginx.conf
+  kibana_config:
+    file: ./kibana/kibana.yml
+services:
+  elasticsearch:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/elasticsearch-platinum:6.1.0
+    environment:
+      - "cluster.name=zhongjiaxin-es-prod"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ELASTIC_PASSWORD=zhongjiaxin.2017"
+      - "network.host=0.0.0.0"
+      - "discovery.zen.minimum_master_nodes=2"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+      - "xpack.security.enabled=true"
+      - "xpack.security.transport.ssl.enabled=true"
+      - "xpack.security.http.ssl.enabled=true"
+      - "xpack.security.transport.ssl.verification_mode=certificate"
+      - "xpack.ssl.certificate_authorities=/usr/share/elasticsearch/config/x-pack/certificates/ca/ca.crt"
+      - "xpack.ssl.certificate=/usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/elasticsearch.crt"
+      - "xpack.ssl.key=/usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/elasticsearch.key"
+      - "script.painless.regex.enabled=true"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    networks:
+      - esnet
+    ports:
+       - target: 9200
+         published: 9200
+         protocol: tcp
+         mode: host
+    volumes:
+      - esdata3:/usr/share/elasticsearch/data
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.elasticsearch == elasticsearch
+      update_config:
+        parallelism: 1
+        delay: 60s
+      endpoint_mode: dnsrr
+  logstash:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/logstash:6.1.0
+    environment:
+      - "xpack.monitoring.elasticsearch.url=https://elasticsearch:9200"
+      - "xpack.monitoring.elasticsearch.username=elastic"
+      - "xpack.monitoring.elasticsearch.password=zhongjiaxin.2017"
+      - "LS_JAVA_OPTS=-Xmx2g"
+      - "xpack.monitoring.elasticsearch.ssl.ca=/usr/share/logstash/certs/ca/ca.crt"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 4096M
+      placement:
+        constraints:
+          - node.labels.logstash == logstash
+      mode: replicated
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    ports:
+      - 5044:5044
+    networks:
+      - esnet
+    configs:
+      - source: logstash-conf
+        target: /usr/share/logstash/pipeline/logstash.conf
+  kibana:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/kibana:6.1.0
+    ports:
+      - "5601:5601"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - esnet
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+#  es_proxy:
+#    image: nginx:latest
+#    ports:
+#      - "9200:80"
+#    networks:
+#      - esnet
+#    volumes:
+#      - /etc/localtime:/etc/localtime:ro
+#    deploy:
+#      replicas: 1
+#      resources:
+#        limits:
+#          cpus: '1'
+#          memory: 1024M
+#      update_config:
+#        parallelism: 1
+#        delay: 5s
+#      placement:
+#        constraints:
+#          - node.role != manager
+#      restart_policy:
+#        condition: on-failure
+#    configs:
+#      - source: es_proxy_config
+#        target: /etc/nginx/nginx.conf
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - esnet
+#  apm-server:
+#    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/apm-server:6.1.0
+#    environment:
+#      - "output.elasticsearch.hosts=elasticsearch:9200"
+#      - "apm-server.host=:8200"
+#    deploy:
+#      replicas: 1
+#      placement:
+#        constraints: [node.role != manager]
+#    networks:
+#      - esnet

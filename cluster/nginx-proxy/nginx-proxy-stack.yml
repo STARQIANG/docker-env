@@ -1,0 +1,63 @@
+version: '3.3'
+configs:
+  nginx-conf:
+    file: ./nginx-proxy.conf
+services:
+  nginx-proxy:
+    image: nginx:latest
+    hostname: nginx-proxy
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster3]
+    configs:
+      - source: nginx-conf
+        target: /etc/nginx/nginx.conf
+    ports:
+       - target: 8082
+         published: 8082
+         protocol: tcp
+         mode: host
+       - target: 8089
+         published: 8089
+         protocol: tcp
+         mode: host
+       - target: 8088
+         published: 8088
+         protocol: tcp
+         mode: host
+       - target: 8186
+         published: 8186
+         protocol: tcp
+         mode: host
+       - target: 8085
+         published: 8085
+         protocol: tcp
+         mode: host
+       - target: 8083
+         published: 8083
+         protocol: tcp
+         mode: host
+#   extra_hosts:
+#      - "db-cluster1:10.0.8.117"
+#      - "db-cluster2:10.0.8.116"
+#      - "db-cluster3:10.0.8.115"
+    networks:
+      - mynet
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "nginx-proxy"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Shanghai
+networks:
+  mynet:
+    driver: overlay
+    external: true

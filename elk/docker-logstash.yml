@@ -1,0 +1,90 @@
+version: '3.3'
+
+networks:
+  esnet:
+    external: true
+configs:
+  logstash-conf:
+    file: ./logstash/logstash.conf
+  logstash-kafka-conf:
+    file: ./logstash/logstash_kafka.conf
+  ca_crt:
+    file: ./certs/ca/ca.crt
+services:
+  logstash01:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/logstash:6.1.0
+    environment:
+      - "xpack.monitoring.elasticsearch.url=https://es01:9200"
+      - "xpack.monitoring.elasticsearch.username=elastic"
+      - "xpack.monitoring.elasticsearch.password=zhongjiaxin.2017"
+      - "xpack.monitoring.elasticsearch.ssl.ca=/usr/share/logstash/certs/ca/ca.crt"
+      - "LS_JAVA_OPTS=-Xmx1g"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    extra_hosts:
+      - "kafka.zhongjiaxin.com:10.33.80.240"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    ports:
+      - target: 5044
+        published: 5044
+        protocol: tcp
+        mode: host
+      - target: 514
+        published: 514
+        protocol: tcp
+        mode: host
+      - target: 514
+        published: 514
+        protocol: udp
+        mode: host
+      - target: 515
+        published: 515
+        protocol: tcp
+        mode: host
+      - target: 515
+        published: 515
+        protocol: udp
+        mode: host
+    networks:
+      - esnet
+    configs:
+      - source: logstash-kafka-conf
+        target: /usr/share/logstash/pipeline/logstash.conf
+      - source: ca_crt
+        target: /usr/share/logstash/certs/ca/ca.crt
+  logstash02:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/logstash:6.1.0
+    environment:
+      - "xpack.monitoring.elasticsearch.url=https://es01:9200"
+      - "xpack.monitoring.elasticsearch.username=elastic"
+      - "xpack.monitoring.elasticsearch.password=zhongjiaxin.2017"
+      - "xpack.monitoring.elasticsearch.ssl.ca=/usr/share/logstash/certs/ca/ca.crt"
+      - "LS_JAVA_OPTS=-Xmx1g"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    extra_hosts:
+      - "kafka.zhongjiaxin.com:10.33.80.240"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+      mode: replicated
+      replicas: 3
+      restart_policy:
+        condition: on-failure
+    networks:
+      - esnet
+    configs:
+      - source: logstash-conf
+        target: /usr/share/logstash/pipeline/logstash.conf
+      - source: ca_crt
+        target: /usr/share/logstash/certs/ca/ca.crt

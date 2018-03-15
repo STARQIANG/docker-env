@@ -1,0 +1,225 @@
+version: '3.3'
+
+volumes:
+  esdata1:
+  esdata4:
+  esdata5:
+  esdata6:
+networks:
+  esnet:
+    external: true
+configs:
+  ca_crt:
+    file: ./certs/ca/ca.crt
+  es01_crt:
+    file: ./certs/es01/es01.crt
+  es01_key:
+    file: ./certs/es01/es01.key
+  es04_crt:
+    file: ./certs/es04/es04.crt
+  es04_key:
+    file: ./certs/es04/es04.key
+  es05_crt:
+    file: ./certs/es05/es05.crt
+  es05_key:
+    file: ./certs/es05/es05.key
+  es06_crt:
+    file: ./certs/es06/es06.crt
+  es06_key:
+    file: ./certs/es06/es06.key
+  elastic_config:
+    file: ./elasticsearch/elasticsearch.yml
+services:
+  es01:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/elasticsearch-platinum:6.1.0
+    environment:
+      - "node.master=true"
+      - "node.data=true"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ELASTIC_PASSWORD=zhongjiaxin.2017"
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    networks:
+      - esnet
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.elasticsearch == elasticsearch
+      resources:
+        limits:
+          cpus: '8'
+          memory: 8g
+      update_config:
+        parallelism: 1
+        delay: 60s
+      endpoint_mode: dnsrr
+    configs:
+      - source: ca_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/ca/ca.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es01_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es01_key
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.key
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+  es04:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/elasticsearch-platinum:6.1.0
+    environment:
+      - "node.name=es04"
+      - "node.master=false"
+      - "node.data=true"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ELASTIC_PASSWORD=zhongjiaxin.2017"
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    networks:
+      - esnet
+    volumes:
+      - esdata4:/usr/share/elasticsearch/data
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '8'
+          memory: 8g
+      placement:
+        constraints:
+          - node.hostname == elk1-prod
+    configs:
+      - source: ca_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/ca/ca.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es04_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es04_key
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.key
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        uid: '1000'
+        gid: '0'
+  es05:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/elasticsearch-platinum:6.1.0
+    environment:
+      - "node.name=es05"
+      - "node.master=false"
+      - "node.data=true"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ELASTIC_PASSWORD=zhongjiaxin.2017"
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    networks:
+      - esnet
+    volumes:
+      - esdata5:/usr/share/elasticsearch/data
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '8'
+          memory: 8g
+      placement:
+        constraints:
+          - node.hostname == elk2-prod
+    configs:
+      - source: ca_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/ca/ca.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es05_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es05_key
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.key
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        uid: '1000'
+        gid: '0'
+  es06:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/elasticsearch-platinum:6.1.0
+    environment:
+      - "node.name=es06"
+      - "node.master=false"
+      - "node.data=true"
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - "ELASTIC_PASSWORD=zhongjiaxin.2017"
+    ulimits:
+      memlock: -1
+      nofile:
+        hard: 65536
+        soft: 65536
+      nproc: 65538
+    networks:
+      - esnet
+    volumes:
+      - esdata6:/usr/share/elasticsearch/data
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '8'
+          memory: 8g
+      placement:
+        constraints:
+          - node.hostname == elk3-prod
+    configs:
+      - source: ca_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/ca/ca.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es06_crt
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.crt
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: es06_key
+        target: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.key
+        uid: '1000'
+        gid: '0'
+        mode: 0440
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+        uid: '1000'
+        gid: '0'
+

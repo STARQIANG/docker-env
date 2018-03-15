@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+
+0 0  * * *    /opt/zhongjiaxin_env/shell/every_day_task.sh    >> /opt/logs/every_day_task.log 2>&1

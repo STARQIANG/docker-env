@@ -1,0 +1,89 @@
+version: "3.3"
+services:
+
+  sentinel1:
+    image: redis
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+      placement:
+        constraints:
+          - node.hostname == db-cluster1
+    ports:
+      - target: 26379
+        published: 26379
+        protocol: tcp
+        mode: host
+    volumes:
+      - redis_data1:/data
+    networks:
+      - mynet
+    command: /bin/bash -c "rm -f /data/redis_sentinel.conf && touch /data/redis_sentinel.conf && redis-server /data/redis_sentinel.conf --sentinel monitor mysentinel 10.0.8.117 6379 2 --sentinel down-after-milliseconds mysentinel 5000 --sentinel parallel-syncs mysentinel 1 --sentinel failover-timeout mysentinel 180000 --sentinel announce-ip 10.0.8.117 --sentinel announce-port 26379"
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "redis-sentinel"
+  sentinel2:
+    image: redis
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+      placement:
+        constraints:
+          - node.hostname == db-cluster2
+    ports:
+      - target: 26379
+        published: 26379
+        protocol: tcp
+        mode: host
+    volumes:
+      - redis_data2:/data
+    networks:
+      - mynet
+    command: /bin/bash -c "rm -f /data/redis_sentinel.conf && touch /data/redis_sentinel.conf && redis-server /data/redis_sentinel.conf --sentinel monitor mysentinel 10.0.8.117 6379 2 --sentinel down-after-milliseconds mysentinel 5000 --sentinel parallel-syncs mysentinel 1 --sentinel failover-timeout mysentinel 180000 --sentinel announce-ip 10.0.8.116 --sentinel announce-port 26379"
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "redis-sentinel"
+  sentinel3:
+    image: redis
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+      placement:
+        constraints:
+          - node.hostname == db-cluster3
+    ports:
+      - target: 26379
+        published: 26379
+        protocol: tcp
+        mode: host
+    volumes:
+      - redis_data3:/data
+    networks:
+      - mynet
+    command: /bin/bash -c "rm -f /data/redis_sentinel.conf && touch /data/redis_sentinel.conf && redis-server /data/redis_sentinel.conf --sentinel monitor mysentinel 10.0.8.117 6379 2 --sentinel down-after-milliseconds mysentinel 5000 --sentinel parallel-syncs mysentinel 1 --sentinel failover-timeout mysentinel 180000 --sentinel announce-ip 10.0.8.115 --sentinel announce-port 26379"
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "redis-sentinel"
+networks:
+  mynet:
+    driver: overlay
+    external: true
+volumes:
+  redis_data1:
+  redis_data2:
+  redis_data3:

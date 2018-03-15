@@ -1,0 +1,91 @@
+version: "3.3"
+
+volumes:
+  rddata:
+    driver: local
+services:
+  redis1:
+    image: redis
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+      placement:
+        constraints:
+          - node.hostname == db-cluster1
+    volumes:
+      - rddata:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - target: 6379
+        published: 6379
+        protocol: tcp
+        mode: host
+    networks:
+      - mynet
+    command: redis-server --save "" --maxmemory 5gb --timeout 0 --tcp-keepalive 60 --bind 0.0.0.0 --slave-announce-ip 10.0.8.117 --slave-announce-port 6379
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "redis"
+  redis2:
+    image: redis
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+      placement:
+        constraints:
+          - node.hostname == db-cluster2
+    volumes:
+      - rddata:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - target: 6379
+        published: 6379
+        protocol: tcp
+        mode: host
+    networks:
+      - mynet
+    command: redis-server --save "" --maxmemory 5gb --timeout 0 --tcp-keepalive 60 --bind 0.0.0.0 --slave-announce-ip 10.0.8.116 --slave-announce-port 6379 --slaveof redis1 6379
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "redis"
+  redis3:
+    image: redis
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 60s
+      placement:
+        constraints:
+          - node.hostname == db-cluster3
+    volumes:
+      - rddata:/data
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - target: 6379
+        published: 6379
+        protocol: tcp
+        mode: host
+    networks:
+      - mynet
+    command: redis-server --save "" --maxmemory 5gb --timeout 0 --tcp-keepalive 60 --bind 0.0.0.0 --slave-announce-ip 10.0.8.115 --slave-announce-port 6379 --slaveof redis1 6379
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "redis"
+networks:
+  mynet:
+    driver: overlay
+    external: true

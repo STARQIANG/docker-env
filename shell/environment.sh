@@ -16,6 +16,7 @@ echo "export CLASSPATH=.:\${JAVA_HOME}/lib/dt.jar:\${JAVA_HOME}/lib/tools.jar" >
 source /etc/profile
 
 
+
 docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
   --driver generic \
   --generic-ip-address=10.33.80.116  \
@@ -28,6 +29,11 @@ docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs
   --generic-ssh-key ~/.ssh/id_rsa \
    test2
 
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ip-address=10.33.80.109  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   test3
 
 docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
   --driver generic \
@@ -39,6 +45,13 @@ docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs
 
 docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
   --driver generic \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt dm.directlvm_device=/dev/xdf" \
+  --engine-opt "storage-opt dm.thinp_percent=95" \
+  --engine-opt "storage-opt dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt dm.directlvm_device_force=false" \
   --generic-ssh-port=22  \
   --generic-ip-address=10.33.80.115  \
   --generic-ssh-key ~/.ssh/id_rsa \
@@ -52,6 +65,26 @@ docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs
   --generic-ssh-key ~/.ssh/id_rsa \
    online
 
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.33.80.119  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   dev1
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.33.80.120  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   dev2
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.33.80.108  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   dev4
 
 docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
   --driver generic \
@@ -77,3 +110,175 @@ docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs
   --generic-ip-address=10.33.80.124  \
   --generic-ssh-key ~/.ssh/id_rsa \
    elk3
+
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=2222  \
+  --generic-ip-address=10.0.8.112  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdd" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   elk1-prod
+
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=2222  \
+  --generic-ip-address=10.0.8.113  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdd" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   elk2-prod
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=2222  \
+  --generic-ip-address=10.0.8.114  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdd" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   elk3-prod
+
+
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --engine
+  --driver generic \
+  --generic-ip-address=10.0.8.117  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   db-cluster1
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.117  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   db-cluster1
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ip-address=10.0.8.116  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   db-cluster2
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.116  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   db-cluster2
+
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ip-address=10.0.8.115  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   db-cluster3
+
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.115  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   db-cluster3
+
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ip-address=10.0.8.118  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   prod1
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ip-address=10.0.8.119  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   prod2
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.122  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   log
+
+
+############### elk #########################
+sysctl -w vm.max_map_count=262144
+echo 'vm.max_map_count=262144' >> /etc/sysctl.conf
+vim /etc/security/limits.conf
+docker swarm join --token SWMTKN-1-2eejnrmu672ra0ajwxuu6jywam5w1aauk1x03vu30bx5voydv2-f3wwmezj09k3b4xh2t7fc9hvs 10.0.8.112:2377
+
+docker node update --label-add logstash=logstash elk2-prod && \
+docker node update --label-add logstash=logstash elk3-prod
+docker node update --label-add elasticsearch=elasticsearch elk1-prod && \
+docker node update --label-add elasticsearch=elasticsearch elk2-prod && \
+docker node update --label-add elasticsearch=elasticsearch elk3-prod
+
+docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=7946/tcp  --permanent  && firewall-cmd --reload && \
+docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=7946/udp  --permanent  && firewall-cmd --reload && \
+docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=4789/udp  --permanent  && firewall-cmd --reload
+
+docker-machine ssh elk1-prod firewall-cmd --permanent --zone=public --add-port=4789/tcp  --permanent  && firewall-cmd --reload && \
+docker-machine ssh elk1-prod firewall-cmd --permanent --zone=public --add-port=4098/tcp  --permanent  && firewall-cmd --reload
+
+firewall-cmd --permanent --zone=public --add-port=9600/tcp  --permanent  && firewall-cmd --reload
+firewall-cmd --permanent --zone=public --add-port=5061/tcp  --permanent  && firewall-cmd --reload
+############### elk #########################
+## 批量替换jenkins 文件
+sed -i "s/<execTimeout>120000<\/execTimeout>/<execTimeout>300000<\/execTimeout>/g" `grep  \<execTimeout\>120000\<\/execTimeout\>  -rl jobs/*/*.xml`
+
+docker swarm join --token SWMTKN-1-25m605xo0rxkamhgbm7myq9chwnpn36jpt557knyaw8fdpcf9d-5icoppcsl702qhbg9e5lxwd53 10.0.8.117:2377
+
+#关闭“You have new mail in /var/spool/mail/root”提示
+echo “unset MAILCHECK” >> /etc/profile && source /etc/profile
+
+
+
+sudo yum-config-manager \
+    --add-repo \
+    https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo

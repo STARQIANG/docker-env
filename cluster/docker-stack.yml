@@ -1,0 +1,68 @@
+version: '3.3'
+services:
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - target: 8080
+        published: 9080
+        protocol: tcp
+        mode: host
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster1]
+    networks:
+      - mynet
+  phpredmin:
+    image: sasanrose/phpredmin
+    hostname: phpredmin
+    ports:
+      - target: 80
+        published: 9070
+        protocol: tcp
+        mode: host
+    environment:
+      - PHPREDMIN_DATABASE_REDIS_0_HOST=redis1
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster2]
+    networks:
+      - mynet
+  zkui:
+    image: maauso/zkui:latest
+    hostname: zkui
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster3]
+    ports:
+      - target: 9090
+        published: 9090
+        protocol: tcp
+        mode: host
+    environment:
+      - ZKLIST=zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+      - TZ=Asia/Shanghai
+    networks:
+      - mynet
+networks:
+  mynet:
+    driver: overlay
+    external: true

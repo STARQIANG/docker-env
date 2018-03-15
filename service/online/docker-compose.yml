@@ -57,6 +57,7 @@ services:
       - /var/lib/online/mvn_repository:/root/.m2/repository
       - /var/lib/online/maven:/usr/share/maven/conf
       - /etc/localtime:/etc/localtime:ro
+      - /root/service:/root/service
     command: /usr/bin/supervisord
     networks:
       default:
@@ -68,7 +69,7 @@ services:
     cap_add:
       - NET_ADMIN
     ports:
-     - "1194:1194/tcp"
+     - "1194:1194/udp"
      - "3128:3128"
     dns:
       - 114.114.114.114
@@ -98,6 +99,11 @@ services:
     environment:
       - NGINX_PORT=80
     restart: always
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.33.80.122:514"
+        tag: nginx-online
     volumes:
       - /var/lib/online/nginx/reverse-proxy.conf:/etc/nginx/conf.d/default.conf
       - /var/lib/online/nginx/nginx.conf:/etc/nginx/nginx.conf
@@ -154,6 +160,36 @@ services:
     networks:
       default:
         ipv4_address: 172.21.1.9
+  dns-server:
+    image:  andyshinn/dnsmasq
+    container_name: dns-prod
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    command: --log-facility=-
+    volumes:
+      - /var/lib/online/dns-prod/dnsmasq.conf:/etc/dnsmasq.conf
+      - /var/lib/online/dns-prod/dnsmasqhosts:/etc/dnsmasqhosts
+      - /var/lib/online/dns-prod/resolv.dnsmasq:/etc/resolv.dnsmasq
+    restart: always
+    networks:
+      default:
+        ipv4_address: 172.21.1.10
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+     - PMA_ARBITRARY=1
+    restart: always
+    ports:
+     - 8080:80
+    volumes:
+     - /sessions
+    networks:
+      default:
+        ipv4_address: 172.21.1.11
 networks:
   default:
     driver: bridge

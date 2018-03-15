@@ -1,0 +1,16 @@
+version: '2.2'
+services:
+ dnsmasq:
+    image:  andyshinn/dnsmasq
+    container_name: dnsmasq
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    command: --log-facility=-
+    volumes:
+      - /var/lib/dns/dnsmasq.conf:/etc/dnsmasq.conf
+      - /var/lib/dns/dnsmasqhosts:/etc/dnsmasqhosts
+      - /var/lib/dns/resolv.dnsmasq:/etc/resolv.dnsmasq
+    restart: always

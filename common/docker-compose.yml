@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+    kafka:
+      build: ./kafka
+      image: reg.zhongjiaxin.com/library/kafka:latest
+    java:
+      build: ./java
+      image: reg.zhongjiaxin.com/library/java:8
+    zookeeper:
+      build: ./zookeeper
+      image: reg.zhongjiaxin.com/library/zookeeper

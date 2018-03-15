@@ -1,0 +1,92 @@
+version: '3.3'
+
+networks:
+  hostnet:
+    external:
+      name: host
+services:
+  keepalived:
+    image: osixia/keepalived:1.4.0
+    environment:
+      KEEPALIVED_PRIORITY: "150"
+      KEEPALIVED_PASSWORD: "123456"
+      KEEPALIVED_UNICAST_PEERS: "#PYTHON2BASH:['10.33.80.122', '10.33.80.123','10.33.80.124']"
+      KEEPALIVED_VIRTUAL_IPS: "#PYTHON2BASH:['10.33.80.240']"
+      KEEPALIVED_INTERFACE: "ens160"
+    cap_add:
+      - NET_ADMIN
+    privileged: true
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: "tcp://10.33.80.123:514"
+#        tag: keepalived
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.elasticsearch == elasticsearch
+      restart_policy:
+        condition: on-failure
+    networks:
+      - hostnet
+
+
+
+
+#docker service create  --name keepalived \
+#--network host \
+#--mode=global \
+#--cap-add=NET_ADMIN --net="host"
+#--env KEEPALIVED_INTERFACE="ens160" \
+#--env KEEPALIVED_PASSWORD="123456" \
+#--env KEEPALIVED_PRIORITY="100" \
+#--env KEEPALIVED_UNICAST_PEERS="#PYTHON2BASH:['10.33.80.122', '10.33.80.123','10.33.80.124']" \
+#--env KEEPALIVED_VIRTUAL_IPS="#PYTHON2BASH:['10.33.80.240']"  \
+#--detach osixia/keepalived:1.4.0
+
+#
+#
+#
+docker run  --name keepalived \
+--cap-add=NET_ADMIN --net="host" \
+--restart=always \
+--env KEEPALIVED_INTERFACE="ens160" \
+--env KEEPALIVED_PASSWORD="123456" \
+--env KEEPALIVED_PRIORITY="100" \
+--env KEEPALIVED_UNICAST_PEERS="#PYTHON2BASH:['10.33.80.122', '10.33.80.123','10.33.80.124']" \
+--env KEEPALIVED_VIRTUAL_IPS="#PYTHON2BASH:['10.33.80.240']"  \
+--detach osixia/keepalived:1.4.0
+#
+docker run --name keepalived \
+--cap-add=NET_ADMIN --net="host" \
+--restart=always \
+--env KEEPALIVED_INTERFACE="ens160" \
+--env KEEPALIVED_PASSWORD="123456" \
+--env KEEPALIVED_PRIORITY="100" \
+--env KEEPALIVED_UNICAST_PEERS="#PYTHON2BASH:['10.0.8.112', '10.0.8.113','10.0.8.114']" \
+--env KEEPALIVED_VIRTUAL_IPS="#PYTHON2BASH:['10.0.8.210']"  \
+--detach osixia/keepalived:1.4.0
+#
+#
+#
+#ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2376
+#-H unix:///var/run/docker.sock
+#--storage-driver devicemapper
+#--tlsverify --tlscacert /etc/docker/ca.pem
+#--tlscert /etc/docker/server.pem --tlskey /etc/docker/server-key.pem
+#--label provider=generic --registry-mirror https://7os77co8.mirror.aliyuncs.com
+# --storage-opt dm.directlvm_device=/dev/sdc
+# --storage-opt dm.thinp_percent=95
+# --storage-opt dm.thinp_metapercent=1
+# --storage-opt dm.thinp_autoextend_threshold=80
+# --storage-opt dm.thinp_autoextend_percent=20
+# --storage-opt dm.directlvm_device_force=false
+
+
+docker service create \
+          --name nginx \
+          --replicas=3 \
+          --publish "8888:80" nginx

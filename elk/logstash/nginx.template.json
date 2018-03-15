@@ -1,0 +1,104 @@
+ {
+        "order":0,
+        "version": 3,
+         "index_patterns": [
+             "nginx-*"
+         ],
+        "settings": {
+            "index.refresh_interval": "5s",
+            "index.number_of_replicas": "1"
+        },
+        "mappings": {
+            "_default_": {
+                "dynamic_templates": [
+                    {
+                        "message_field": {
+                            "match": "message",
+                            "match_mapping_type": "string",
+                            "mapping": {
+                                "type": "text",
+                                "norms": false
+                            }
+                        }
+                    },
+                    {
+                        "string_fields": {
+                            "match": "*",
+                            "match_mapping_type": "string",
+                            "mapping": {
+                                "type": "text",
+                                "norms": false,
+                                "fields": {
+                                    "keyword": {
+                                        "type": "keyword",
+                                        "ignore_above": 256
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "properties": {
+                "@timestamp": {
+                    "type": "date",
+                    "format": "YYYY-MM-dd HH:mm:ss Z"
+                },
+                "@version": {
+                    "type": "integer"
+                },
+                "agent": {
+                    "type": "keyword"
+                },
+                "bytes": {
+                    "type": "integer"
+                },
+                "host": {
+                    "type": "keyword"
+                },
+                "status": {
+                    "type": "integer"
+                },
+                "clientip": {
+                    "type": "keyword"
+                },
+                "referrer": {
+                    "type": "text",
+                    "fields":{
+                        "raw": {  "type": "keyword" }
+                    }
+                },
+                "url": {
+                    "type": "text",
+                    "fields":{
+                        "raw": {
+                            "type": "keyword"
+                        }
+                    }
+                },
+                "method": {
+                    "type": "keyword"
+                },
+                "request_time": {
+                    "type": "float"
+                },
+                "geoip": {
+                    "dynamic": true,
+                    "properties": {
+                        "ip": {
+                            "type": "ip"
+                        },
+                        "location": {
+                            "type": "geo_point"
+                        },
+                        "latitude": {
+                            "type": "half_float"
+                        },
+                        "longitude": {
+                            "type": "half_float"
+                        }
+                    }
+                }
+            }
+        }
+    }

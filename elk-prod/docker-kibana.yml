@@ -1,0 +1,63 @@
+version: '3.3'
+
+networks:
+  esnet:
+    external: true
+configs:
+  kibana_config:
+    file: ./kibana/kibana.yml
+  ca_crt:
+    file: ./certs/ca/ca.crt
+  es_proxy_config:
+    file: ./es_proxy/nginx.conf
+services:
+  kibana:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/kibana:6.1.0
+    ports:
+      - "5601:5601"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    networks:
+      - esnet
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+      - source: ca_crt
+        target: /usr/share/kibana/plugins/x-pack/certs/ca/ca.crt
+  esproxy:
+    image: nginx:latest
+    ports:
+      - "9200:80"
+    networks:
+      - esnet
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1024M
+      update_config:
+        parallelism: 1
+        delay: 5s
+      placement:
+        constraints:
+          - node.role != manager
+      restart_policy:
+        condition: on-failure
+    configs:
+      - source: es_proxy_config
+        target: /etc/nginx/nginx.conf
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    networks:
+      - esnet

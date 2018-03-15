@@ -14,11 +14,6 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "3307:8080"
   redis:
     image: docker.io/redis:latest
     container_name: redis
@@ -57,6 +52,9 @@ services:
     environment:
       POSTGRES_PASSWORD: 123456
     command: "postgres -c config_file=/etc/postgresql/postgresql.conf"
-
-
+  filebeat:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/elasticsearch:6.1.0
+    container_name: filebeat
+    volumes:
+      - /root/logs:/root/logs
 

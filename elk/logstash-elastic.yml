@@ -1,0 +1,45 @@
+version: '3.3'
+
+networks:
+  esnet:
+    external: true
+configs:
+  logstash-conf:
+    file: ./logstash/logstash.conf
+  ca_crt:
+    file: ./certs/ca/ca.crt
+services:
+  logstash02:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/logstash:6.1.0
+    environment:
+      - "xpack.monitoring.elasticsearch.url=https://es01:9200"
+      - "xpack.monitoring.elasticsearch.username=elastic"
+      - "xpack.monitoring.elasticsearch.password=zhongjiaxin.2017"
+      - "xpack.monitoring.elasticsearch.ssl.ca=/usr/share/logstash/certs/ca/ca.crt"
+      - "LS_JAVA_OPTS=-Xmx1g"
+    extra_hosts:
+      - "kafka.zhongjiaxin.com:10.33.80.240"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2048M
+      mode: global
+      endpoint_mode: dnsrr
+      placement:
+        constraints:
+          - node.labels.logstash == logstash
+      restart_policy:
+        condition: on-failure
+    ports:
+      - target: 5044
+        published: 5044
+        protocol: tcp
+        mode: host
+    networks:
+      - esnet
+    configs:
+      - source: logstash-conf
+        target: /usr/share/logstash/pipeline/logstash.conf
+      - source: ca_crt
+        target: /usr/share/logstash/certs/ca/ca.crt

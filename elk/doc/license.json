@@ -1,0 +1,14 @@
+//  curl -XPUT  -H "Content-Type: application/json" 'http://10.33.80.122:9200/_xpack/license'  -d @license.json
+{
+    "license": {
+        "uid": "b3e2761a-73aa-44d2-b85f-3d44f278ae6e",
+        "type": "platinum",
+        "issue_date_in_millis": 1514937600000,
+        "expiry_date_in_millis":2524579200999,
+        "max_nodes": 100,
+        "issued_to": "qiang liu (北京中佳信科技发展有限公司)",
+        "issuer": "Web Form",
+        "signature": "AAAAAwAAAA0lFPa2VJ8qGvk1aElZAAABmC9ZN0hjZDBGYnVyRXpCOW5Bb3FjZDAxOWpSbTVoMVZwUzRxVk1PSmkxaktJRVl5MUYvUWh3bHZVUTllbXNPbzBUemtnbWpBbmlWRmRZb25KNFlBR2x0TXc2K2p1Y1VtMG1UQU9TRGZVSGRwaEJGUjE3bXd3LzRqZ05iLzRteWFNekdxRGpIYlFwYkJiNUs0U1hTVlJKNVlXekMrSlVUdFIvV0FNeWdOYnlESDc3MWhlY3hSQmdKSjJ2ZTcvYlBFOHhPQlV3ZHdDQ0tHcG5uOElCaDJ4K1hob29xSG85N0kvTWV3THhlQk9NL01VMFRjNDZpZEVXeUtUMXIyMlIveFpJUkk2WUdveEZaME9XWitGUi9WNTZVQW1FMG1DenhZU0ZmeXlZakVEMjZFT2NvOWxpZGlqVmlHNC8rWVVUYzMwRGVySHpIdURzKzFiRDl4TmM1TUp2VTBOUlJZUlAyV0ZVL2kvVk10L0NsbXNFYVZwT3NSU082dFNNa2prQ0ZsclZ4NTltbU1CVE5lR09Bck93V2J1Y3c9PQAAAQCvoNKYQJ59k0LZVLbPeICaUyXnEX+x+vJ3S0wkqkkUQajsrK2Rgeie9FJrEXld+K5pxXp4FdC4OQ7AUXEYdFzkoZ4IqnZ4cFNEZzg26b5N1cCQxNfOLOCUjN3a0HSwwduCsxEcqt54vZ9FKMM6xzKnu11ZaltcngVp1Ac5DUX73wbvoUpJIa+DbmOv4HVrAzluF8l7AqxpLLIs8FZihlcAM+KPIBfSOiVbMSmh8N+UCE5B8NxpHY+MBGO22AxlqvAnv5L9fobQSqua1TSmZPxmCAKzTe2t22cZix3J2gszz6aqlyk9kP0qkeP3suQlpdXXNci6A4BNtsVRfkaCmQJ0",
+        "start_date_in_millis": 1514937600000
+    }
+}

@@ -1,0 +1,20 @@
+filebeat.prospectors:
+
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/*/*.log
+  document_type: tomcat
+  multiline.pattern: '^\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
+  multiline.negate: true
+  multiline.match: after
+  tags: ["tomcat"]
+output.kafka:
+  hosts: ["10.0.8.112:9092", "10.0.8.113:9092", "10.0.8.114:9092"]
+  topic: 'log'
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+logging.level: info
