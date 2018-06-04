@@ -3,10 +3,10 @@ xpack.license.self_generated.type: trial
 discovery.zen.fd.ping_timeout: 120s
 discovery.zen.fd.ping_retries: 6
 discovery.zen.fd.ping_interval: 30s
-discovery.zen.minimum_master_nodes: 2
+discovery.zen.minimum_master_nodes: 3
 discovery.zen.commit_timeout: 60s
 discovery.zen.publish_timeout: 60s
-discovery.zen.ping.unicast.hosts: ["es01","es02"]
+discovery.zen.ping.unicast.hosts: ["es01","es01:9300"]
 network.host: _eth0_
 transport.host: _eth0_
 xpack.security.enabled: true
@@ -17,6 +17,4 @@ xpack.ssl.certificate_authorities: /usr/share/elasticsearch/config/x-pack/certif
 xpack.ssl.certificate: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.crt
 xpack.ssl.key: /usr/share/elasticsearch/config/x-pack/certificates/elasticsearch/server.key
 client.transport.ping_timeout: 60s
-
-
-
+bootstrap.memory_lock: true

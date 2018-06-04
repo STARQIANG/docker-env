@@ -34,11 +34,7 @@ services:
     volumes:
       - kafka-data:/kafka/
       - /etc/localtime:/etc/localtime:ro
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "kafka"
+      - /root/logs/kafka:/opt/kafka/logs
   kafka2:
     image: wurstmeister/kafka
     hostname: kafka2
@@ -69,11 +65,7 @@ services:
     volumes:
       - kafka-data:/kafka/
       - /etc/localtime:/etc/localtime:ro
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "kafka"
+      - /root/logs/kafka:/opt/kafka/logs
   kafka3:
     image: wurstmeister/kafka
     hostname: kafka3
@@ -104,11 +96,7 @@ services:
     volumes:
       - kafka-data:/kafka/
       - /etc/localtime:/etc/localtime:ro
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "kafka"
+      - /root/logs/kafka:/opt/kafka/logs
   kafka-manager:
     image: sheepkiller/kafka-manager
     hostname: kafka-manager

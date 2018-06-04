@@ -7,117 +7,57 @@ networks:
   esnet:
     external: true
 services:
-  kafka1:
-    image: wurstmeister/kafka
-    deploy:
-      mode: global
-      endpoint_mode: dnsrr
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-      placement:
-        constraints:
-          - node.hostname == elk1-prod
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 10.0.8.112
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
-      TZ: Asia/Shanghai
-    networks:
-      esnet:
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "kafkaELK"
-    ports:
-      - target: 9092
-        published: 9092
-        protocol: tcp
-        mode: host
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - kafkaData:/kafka
-  kafka2:
-    image: wurstmeister/kafka
-    deploy:
-      mode: global
-      endpoint_mode: dnsrr
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-      placement:
-        constraints:
-          - node.hostname == elk2-prod
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 10.0.8.113
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_BROKER_ID: 2
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
-      TZ: Asia/Shanghai
-    networks:
-      esnet:
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "kafkaELK"
-    ports:
-      - target: 9092
-        published: 9092
-        protocol: tcp
-        mode: host
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - kafkaData:/kafka
-  kafka3:
-    image: wurstmeister/kafka
-    deploy:
-      mode: global
-      endpoint_mode: dnsrr
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-      placement:
-        constraints:
-          - node.hostname == elk3-prod
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: 10.0.8.114
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_BROKER_ID: 3
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
-      TZ: Asia/Shanghai
-    networks:
-      esnet:
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "kafkaELK"
-    ports:
-      - target: 9092
-        published: 9092
-        protocol: tcp
-        mode: host
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - kafkaData:/kafka
-  kafka-manager:
-    image: sheepkiller/kafka-manager
-    hostname: kafka-manager
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-    environment:
-      ZK_HOSTS: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
-      TZ: Asia/Shanghai
-    networks:
-      esnet:
-    ports:
-      - "9000:9000"
+  kafka:
+     image: wurstmeister/kafka:latest
+     ports:
+       - target: 9092
+         published: 9092
+         protocol: tcp
+         mode: host
+     deploy:
+       mode: global
+       placement:
+         constraints:
+           - node.labels.kafka == kafka
+       endpoint_mode: dnsrr
+     environment:
+       HOSTNAME_COMMAND: "docker info | grep 'Node Address:'| cut -d' ' -f 4"
+       BROKER_ID_COMMAND: "cat /etc/brokerId"
+       KAFKA_LOG_DIRS: "/kafka/kafka-logs-data"
+       KAFKA_ZOOKEEPER_CONNECT: 10.0.8.115:2181,10.0.8.116:2181,10.0.8.117:2181/kafka_ELK
+       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+       KAFKA_ADVERTISED_LISTENERS: INSIDE://:9091,OUTSIDE://_{HOSTNAME_COMMAND}:9092
+       KAFKA_LISTENERS: INSIDE://:9091,OUTSIDE://:9092
+       KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 5
+       TZ: Asia/Shanghai
+     volumes:
+       - /etc/localtime:/etc/localtime:ro
+       - /var/run/docker.sock:/var/run/docker.sock
+       - kafkaData:/kafka
+       - /etc/brokerId:/etc/brokerId
+     networks:
+       esnet:
+#     logging:
+#       driver: syslog
+#       options:
+#         syslog-address: "tcp://10.0.8.122:514"
+#         tag: "kafkaELK"
+#  kafka-manager:
+#      image: sheepkiller/kafka-manager
+#      hostname: kafka-manager
+#      deploy:
+#        mode: replicated
+#        replicas: 1
+#        restart_policy:
+#          condition: on-failure
+#          delay: 5s
+#      environment:
+#        ZK_HOSTS: zookeeper1:2181,zookeeper2:2181,zookeeper3:2181
+#        TZ: Asia/Shanghai
+#      networks:
+#        esnet:
+#      ports:
+#        - "9000:9000"
 
 

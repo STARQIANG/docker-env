@@ -1,0 +1,28 @@
+filebeat.prospectors:
+
+- type: log
+  enabled: true
+  paths:
+    - /var/lib/mysql/slow-queries.log
+  document_type: mysqlslow
+  multiline.pattern: "^# User@Host: "
+  multiline.negate: true
+  multiline.match: after
+  fields:
+    flag: mysql-slow
+- type: log
+  enabled: true
+  paths:
+    - /var/log/mysqld.log
+  document_type: mysqlerror
+  fields:
+    flag: mysql-error
+output.kafka:
+  hosts: ["10.0.8.112:9092", "10.0.8.113:9092", "10.0.8.114:9092"]
+  topic: 'log'
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+logging.level: info

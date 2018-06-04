@@ -3,13 +3,15 @@ version: '3.3'
 configs:
   filebeat-conf:
     file: ./filebeat/filebeat.yml
+  filebeat-db-conf:
+    file: ./filebeat/filebeat-dbcluster.yml
 volumes:
   filebeatData:
     driver: local
 services:
   filebeat-prod1:
     image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
-    hostname: 准生产prod1
+    hostname: prod1
     deploy:
       mode: global
       restart_policy:
@@ -20,6 +22,7 @@ services:
           - node.hostname == prod1
     volumes:
       - /root/logs:/root/logs
+      - /usr/local/nginx/logs:/usr/local/nginx/logs
       - filebeatData:/usr/share/filebeat/data
     logging:
       driver: syslog
@@ -31,7 +34,7 @@ services:
         target: /usr/share/filebeat/filebeat.yml
   filebeat-prod2:
     image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
-    hostname: 准生产prod2
+    hostname: prod2
     deploy:
       mode: global
       restart_policy:
@@ -42,6 +45,7 @@ services:
           - node.hostname == prod2
     volumes:
       - /root/logs:/root/logs
+      - /usr/local/nginx/logs:/usr/local/nginx/logs
       - filebeatData:/usr/share/filebeat/data
     logging:
       driver: syslog
@@ -50,4 +54,27 @@ services:
         tag: "filebeat"
     configs:
       - source: filebeat-conf
+        target: /usr/share/filebeat/filebeat.yml
+  filebeat-db-cluster1:
+    image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
+    hostname: db-cluster1
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints:
+          - node.hostname == db-cluster1
+    volumes:
+      - /var/log/mysqld.log:/var/log/mysqld.log:ro
+      - /var/lib/mysql/slow-queries.log:/var/lib/mysql/slow-queries.log:ro
+      - filebeatData:/usr/share/filebeat/data
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "filebeat"
+    configs:
+      - source: filebeat-db-conf
         target: /usr/share/filebeat/filebeat.yml

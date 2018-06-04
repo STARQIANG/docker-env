@@ -6,24 +6,23 @@ networks:
 configs:
   logstash-syslog-conf:
     file: ./logstash/logstash_syslog.conf
-  ca_crt:
-    file: ./certs/ca/ca.crt
 services:
   logstash01:
     image: registry.cn-beijing.aliyuncs.com/yangzhenwei/logstash:6.1.0
     environment:
+      - "LS_JAVA_OPTS=-Xmx2g"
       - "xpack.monitoring.elasticsearch.url=https://es01:9200"
       - "xpack.monitoring.elasticsearch.username=elastic"
       - "xpack.monitoring.elasticsearch.password=zhongjiaxin.2017"
       - "xpack.monitoring.elasticsearch.ssl.ca=/usr/share/logstash/certs/ca/ca.crt"
-      - "LS_JAVA_OPTS=-Xmx1g"
-    extra_hosts:
-      - "kafka.zhongjiaxin.com:10.0.8.210"
+      - TZ=Asia/Shanghai
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     deploy:
       resources:
         limits:
           cpus: '2'
-          memory: 2048M
+          memory: 4048M
       mode: replicated
       placement:
         constraints:
@@ -47,8 +46,16 @@ services:
     configs:
       - source: logstash-syslog-conf
         target: /usr/share/logstash/pipeline/logstash.conf
-      - source: ca_crt
-        target: /usr/share/logstash/certs/ca/ca.crt
+
+
+
+#docker run   --name "syslog"  \
+#-d  -e LS_JAVA_OPTS="-Xms2g -Xmx2g" \
+#--network "esnet" \
+#--restart=always   \
+#-v /root/logs:/root/logs  \
+#-v  /root/logstash/logstash_syslog.conf:/usr/share/logstash/pipeline/logstash.conf  \
+#-p "514:514"  -p "514:514/udp" registry.cn-beijing.aliyuncs.com/yangzhenwei/logstash:6.1.0
 
 
 

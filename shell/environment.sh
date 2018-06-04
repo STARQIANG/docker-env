@@ -37,11 +37,31 @@ docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs
 
 docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
   --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.33.80.108  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   test4
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.33.80.129  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   GR-test
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
   --generic-ssh-port=2222  \
   --generic-ip-address=10.0.8.199  \
   --generic-ssh-key ~/.ssh/id_rsa \
    real
 
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.189  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+   real2
 
 docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
   --driver generic \
@@ -247,6 +267,49 @@ docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs
    log
 
 
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.176  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   elk4-prod
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.177  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   elk5-prod
+
+docker-machine create  --engine-registry-mirror=https://7os77co8.mirror.aliyuncs.com \
+  --driver generic \
+  --generic-ssh-port=22  \
+  --generic-ip-address=10.0.8.178  \
+  --generic-ssh-key ~/.ssh/id_rsa \
+  --engine-storage-driver devicemapper \
+  --engine-opt "storage-opt=dm.directlvm_device=/dev/sdc" \
+  --engine-opt "storage-opt=dm.thinp_percent=95" \
+  --engine-opt "storage-opt=dm.thinp_metapercent=1" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_threshold=80" \
+  --engine-opt "storage-opt=dm.thinp_autoextend_percent=20" \
+  --engine-opt "storage-opt=dm.directlvm_device_force=false" \
+   elk6-prod
+
+
 ############### elk #########################
 sysctl -w vm.max_map_count=262144
 echo 'vm.max_map_count=262144' >> /etc/sysctl.conf
@@ -259,15 +322,15 @@ docker node update --label-add elasticsearch=elasticsearch elk1-prod && \
 docker node update --label-add elasticsearch=elasticsearch elk2-prod && \
 docker node update --label-add elasticsearch=elasticsearch elk3-prod
 
-docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=7946/tcp  --permanent  && firewall-cmd --reload && \
-docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=7946/udp  --permanent  && firewall-cmd --reload && \
-docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=4789/udp  --permanent  && firewall-cmd --reload
+docker-machine ssh elk3-prod firewall-cmd --permanent --zone=public --add-port=7946/tcp  --add-port=7946/udp  --add-port=4789/udp  --add-port=2377/udp  --permanent  && firewall-cmd --reload
+
 
 docker-machine ssh elk1-prod firewall-cmd --permanent --zone=public --add-port=4789/tcp  --permanent  && firewall-cmd --reload && \
 docker-machine ssh elk1-prod firewall-cmd --permanent --zone=public --add-port=4098/tcp  --permanent  && firewall-cmd --reload
 
 firewall-cmd --permanent --zone=public --add-port=9600/tcp  --permanent  && firewall-cmd --reload
 firewall-cmd --permanent --zone=public --add-port=5061/tcp  --permanent  && firewall-cmd --reload
+firewall-cmd --permanent --zone=public --add-port=2377/tcp  --permanent  && firewall-cmd --reload
 ############### elk #########################
 ## 批量替换jenkins 文件
 sed -i "s/<execTimeout>120000<\/execTimeout>/<execTimeout>300000<\/execTimeout>/g" `grep  \<execTimeout\>120000\<\/execTimeout\>  -rl jobs/*/*.xml`
@@ -275,10 +338,38 @@ sed -i "s/<execTimeout>120000<\/execTimeout>/<execTimeout>300000<\/execTimeout>/
 docker swarm join --token SWMTKN-1-25m605xo0rxkamhgbm7myq9chwnpn36jpt557knyaw8fdpcf9d-5icoppcsl702qhbg9e5lxwd53 10.0.8.117:2377
 
 #关闭“You have new mail in /var/spool/mail/root”提示
-echo “unset MAILCHECK” >> /etc/profile && source /etc/profile
+echo "unset MAILCHECK" >> /etc/profile && source /etc/profile
 
 
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.0.8.0/24"  accept"  &&  \
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.33.80.0/24"  accept"  && \
+firewall-cmd --reload
+firewall-cmd --permanent --add-rich-rule="rule family="ipv4" source address="10.33.50.0/24"  accept"  && firewall-cmd --reload
 
 sudo yum-config-manager \
     --add-repo \
     https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+## 解决重启网卡后容器不能访问的问题
+## WARNING: bridge-nf-call-iptables is disabled解决
+vi /etc/sysctl.conf
+net.ipv4.ip_forward=1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-arptables = 1
+sysctl -p
+
+
+
+docker network create \
+  --driver=overlay \
+  --subnet=192.168.10.0/24 \
+  --attachable \
+  esnet
+
+docker run -it --rm  -v /logs/kafka-log  \
+    --label aliyun.logs.catalina=stdout  \
+    --label aliyun.logs.access=/logs/kafka-log/*.log  \
+    --label aliyun.logs.access.format=regexp  \
+    --label aliyun.logs.access.format.pattern=^\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+ \
+    reg.zhongjiaxin.com/library/dev-kafka-log

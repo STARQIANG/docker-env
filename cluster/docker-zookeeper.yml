@@ -1,0 +1,111 @@
+version: '3.3'
+
+volumes:
+  zkdata:
+    driver: local
+configs:
+  zk-conf:
+    file: ./zookeeper/zoo.cfg
+services:
+  zookeeper1:
+    image: zookeeper
+    hostname: zookeeper1
+    networks:
+      - mynet
+    environment:
+      - TZ=Asia/Shanghai
+      - ZOO_MY_ID=1
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888 server.2=zookeeper2:2888:3888 server.3=zookeeper3:2888:3888
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster1]
+    ports:
+       - target: 2181
+         published: 2181
+         protocol: tcp
+         mode: host
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "zookeeper"
+    volumes:
+      - zkdata:/zk
+      - /etc/localtime:/etc/localtime:ro
+    configs:
+      - source: zk-conf
+        target: /conf/zoo.cfg
+  zookeeper2:
+    image: zookeeper
+    hostname: zookeeper2
+    networks:
+      - mynet
+    environment:
+      - TZ=Asia/Shanghai
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888 server.2=zookeeper2:2888:3888 server.3=zookeeper3:2888:3888
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster2]
+    ports:
+       - target: 2181
+         published: 2181
+         protocol: tcp
+         mode: host
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "zookeeper"
+    volumes:
+      - zkdata:/zk
+      - /etc/localtime:/etc/localtime:ro
+    configs:
+      - source: zk-conf
+        target: /conf/zoo.cfg
+  zookeeper3:
+    image: zookeeper
+    hostname: zookeeper3
+    networks:
+      - mynet
+    environment:
+      - TZ=Asia/Shanghai
+      - ZOO_MY_ID=3
+      - ZOO_SERVERS=server.1=zookeeper1:2888:3888 server.2=zookeeper2:2888:3888 server.3=zookeeper3:2888:3888
+    deploy:
+      mode: global
+      endpoint_mode: dnsrr
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.hostname == db-cluster3]
+    ports:
+       - target: 2181
+         published: 2181
+         protocol: tcp
+         mode: host
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "tcp://10.0.8.122:514"
+        tag: "zookeeper"
+    volumes:
+      - zkdata:/zk
+      - /etc/localtime:/etc/localtime:ro
+    configs:
+      - source: zk-conf
+        target: /conf/zoo.cfg
+networks:
+  mynet:
+    external: true

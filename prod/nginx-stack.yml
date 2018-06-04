@@ -1,7 +1,7 @@
 version: '3.3'
 
 configs:
-  nginx-conf:
+  nginx-conf-01:
     file: ./nginx/nginx.conf
 services:
   nginx:
@@ -19,7 +19,7 @@ services:
       restart_policy:
         condition: on-failure
     configs:
-      - source: nginx-conf
+      - source: nginx-conf-01
         target: /etc/nginx/nginx.conf
     logging:
       driver: syslog
@@ -35,3 +35,4 @@ services:
         published: 80
         protocol: tcp
         mode: host
+

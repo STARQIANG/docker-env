@@ -3,6 +3,9 @@ version: '3.3'
 configs:
   filebeat-conf:
     file: ./filebeat/filebeat.yml
+networks:
+  esnet:
+    external: true
 volumes:
   filebeatData:
     driver: local
@@ -21,11 +24,11 @@ services:
     volumes:
       - /root/logs:/root/logs
       - filebeatData:/usr/share/filebeat/data
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "filebeat"
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      TZ: Asia/Shanghai
+    networks:
+      - esnet
     configs:
       - source: filebeat-conf
         target: /usr/share/filebeat/filebeat.yml

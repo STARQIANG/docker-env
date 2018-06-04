@@ -3,8 +3,8 @@ filebeat.prospectors:
 - type: log
   enabled: true
   paths:
-    - /root/logs/nginx-proxy/*.log
-    - /root/logs/nginx-prod/*.log
+    - /root/logs/service/nginx-proxy/*/*.log
+    - /root/logs/service/nginx-prod/*/*.log
   fields:
     flag: nginx
     mode: syslog
@@ -18,7 +18,7 @@ filebeat.prospectors:
 - type: log
   enabled: true
   paths:
-    - /root/logs/kafka/*.log
+    - /root/logs/service/kafka/*/*.log
   multiline.pattern: '^\[\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
   multiline.negate: true
   multiline.match: after
@@ -28,7 +28,7 @@ filebeat.prospectors:
 - type: log
   enabled: true
   paths:
-    - /root/logs/zookeeper/*.log
+    - /root/logs/service/zookeeper/*/*.log
   multiline.pattern: '^\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
   multiline.negate: true
   multiline.match: after
@@ -38,8 +38,8 @@ filebeat.prospectors:
 - type: log
   enabled: true
   paths:
-    - /root/logs/redis/*.log
-    - /root/logs/redis-sentinel/*.log
+    - /root/logs/service/redis/*/*.log
+    - /root/logs/service/redis-sentinel/*/*.log
   multiline.pattern: '^\d+:'
   multiline.negate: true
   multiline.match: after
@@ -49,7 +49,8 @@ filebeat.prospectors:
 - type: log
   enabled: true
   paths:
-    - /root/logs/kafka-log/*.log
+    - /root/logs/service/kafka-log/*/*.log
+    - /root/logs/service/alert-web/*/*.log
   multiline.pattern: '^\d{4}\-\d{2}\-\d{2}\s\d+\:\d+\:\d+\,\d+'
   multiline.negate: true
   multiline.match: after
@@ -59,7 +60,7 @@ filebeat.prospectors:
     mode: syslog
 output.kafka:
   hosts: ["10.0.8.112:9092", "10.0.8.113:9092", "10.0.8.114:9092"]
-  topic: 'log'
+  topic: 'syslog'
   partition.round_robin:
     reachable_only: false
   required_acks: 1

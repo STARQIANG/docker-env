@@ -9,11 +9,26 @@ filebeat.prospectors:
   multiline.negate: true
   multiline.match: after
   tags: ["tomcat"]
+- type: log
+  enabled: true
+  paths:
+    - /root/logs/*/gc.gc
+  document_type: gc
+  fields:
+    flag: gc
+- type: log
+  enabled: true
+  paths:
+    - /usr/local/nginx/logs/*.log
+  tags: ["nginx"]
+  fields:
+    flag: nginx
 output.kafka:
   hosts: ["10.0.8.112:9092", "10.0.8.113:9092", "10.0.8.114:9092"]
   topic: 'log'
-  partition.round_robin:
-    reachable_only: false
+  partition.hash:
+    hash: ['source', 'beat.hostname']
+    random: true
   required_acks: 1
   compression: gzip
   max_message_bytes: 1000000

@@ -29,11 +29,10 @@ li {
 h1 {
   text-align: center;
   padding-top: 50px;
-  padding-bottom: 20px;
+  /*padding-bottom: 20px;*/
   font-weight: 400;
   color: #fff;
 }
-
 
 .tab {
   padding: 50px;
@@ -54,7 +53,7 @@ h1 {
 .tab .tab-nav li a {
   display: block;
   height: 40px;
-  padding: 0 30px;
+  padding: 0 20px;
   color: #fff;
   text-decoration: none;
   line-height: 40px;
@@ -73,7 +72,7 @@ h1 {
 .tab .content-wrap {
   /*background: #ffffff;*/
   /*padding: 5px;*/
-  padding-top: 20px;
+  padding-top: .5rem;
   /*height: 200px;*/
   /*display: inline-block;*/
 }
@@ -174,11 +173,6 @@ h1 {
   --hover: #ffdc7f;
 }
 
-.raise {
-  --color: #e4cb58;
-  --hover: #94e458;
-}
-
 .up {
   --color: #e4cb58;
   --hover: #94e458;
@@ -188,13 +182,19 @@ h1 {
   --color: #8fc866;
   --hover: #66c887;
 }
+
 .slide {
-  --color: #ffa260;
-  --hover: #e5ff60;
+  --color: #d8dd0a;
+  --hover: #a5ca1d;
+}
+
+.raise {
+  --color: #ff830a;
+  --hover: #e4b72d;
 }
 
 .offset {
-  --color: #19bc8b;
+  --color: #faff0a;
   --hover: #1973bc;
 }
 
@@ -221,7 +221,7 @@ h1 {
   border: 2px solid;
   font: inherit;
   line-height: 1;
-  margin: 1.5em;
+  margin: 1.3rem 1.5em;
   padding: 1em 2em;
   display: inline-block;
   text-decoration: none;
@@ -229,8 +229,9 @@ h1 {
   position: relative;
   vertical-align: middle;
 }
+
 .vh {
-  visibility:hidden
+  visibility: hidden
 }
 
 /*二维码*/
@@ -249,74 +250,70 @@ i {
   background-position: center center;
 }
 
-
 /*测试1*/
 
-i.test1In {
-  background-image: url(../img/test1In.png);
-  background-size: auto;
-  background-position-y: -40px;
-}
+/*i.test1In {*/
+/*background-image: url(../img/test1In.png);*/
+/*background-size: auto;*/
+/*background-position-y: -40px;*/
+/*}*/
 
-i.test1Out {
-  background-image: url(../img/test1Out.png);
-  background-size: auto;
-}
+/*i.test1Out {*/
+/*background-image: url(../img/test1Out.png);*/
+/*background-size: auto;*/
+/*}*/
 
-i.test1B {
-  background-image: url(../img/kfz.png);
-}
-
+/*i.test1B {*/
+/*background-image: url(../img/kfz.png);*/
+/*}*/
 
 /*测试2*/
 
-i.test2In {
-  background-image: url(../img/test2In.png);
-}
+/*i.test2In {*/
+/*background-image: url(../img/test2In.png);*/
+/*}*/
 
-i.test2Out {
-  background-image: url(../img/test2Out.png);
-  background-position: 0px;
-}
+/*i.test2Out {*/
+/*background-image: url(../img/test2Out.png);*/
+/*background-position: 0px;*/
+/*}*/
 
-i.test2B {
-  background-image: url(../img/kfz.png);
-}
-
+/*i.test2B {*/
+/*background-image: url(../img/kfz.png);*/
+/*}*/
 
 /*仿真*/
 
-i.realIn {
-  background-image: url(../img/realIn.png);
-  background-size: auto;
-  background-position: -45px -17px;
-}
+/*i.realIn {*/
+/*background-image: url(../img/realIn.png);*/
+/*background-size: auto;*/
+/*background-position: -45px -17px;*/
+/*}*/
 
-i.realOut {
-  background-image: url(../img/realOut.png);
-  background-size: auto;
-  background-position-y: -40px;
-}
+/*i.realOut {*/
+/*background-image: url(../img/realOut.png);*/
+/*background-size: auto;*/
+/*background-position-y: -40px;*/
+/*}*/
 
-i.realB {
-  background-image: url(../img/kfz.png);
-}
-
+/*i.realB {*/
+/*background-image: url(../img/kfz.png);*/
+/*}*/
 
 /*线上*/
 
-i.onLineOut {
-  background-image: url(../img/onLineOut.png);
-}
+/*i.onLineOut {*/
+/*background-image: url(../img/onLineOut.png);*/
+/*}*/
 
 /*i.onLineOut,i.onLineIn  {
   text-align: center;
   top: 131%;
   right: 0;
 }*/
-i.onLineIn {
-  background-image: url(../img/onLineIn.png);
-}
-i.onLineB {
-  background-image: url(../img/kfz.png);
-}
+/*i.onLineIn {*/
+/*background-image: url(../img/onLineIn.png);*/
+/*}*/
+/*i.onLineB {*/
+/*background-image: url(../img/kfz.png);*/
+/*}*/

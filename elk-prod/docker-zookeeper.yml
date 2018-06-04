@@ -29,11 +29,11 @@ services:
          published: 2181
          protocol: tcp
          mode: host
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "zookeeperELK"
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: "tcp://10.0.8.122:514"
+#        tag: "zookeeperELK"
     volumes:
       - zkdata:/zk
       - /etc/localtime:/etc/localtime:ro
@@ -62,11 +62,11 @@ services:
          published: 2181
          protocol: tcp
          mode: host
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "zookeeperELK"
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: "tcp://10.0.8.122:514"
+#        tag: "zookeeperELK"
     volumes:
       - zkdata:/zk
       - /etc/localtime:/etc/localtime:ro
@@ -95,11 +95,11 @@ services:
          published: 2181
          protocol: tcp
          mode: host
-    logging:
-      driver: syslog
-      options:
-        syslog-address: "tcp://10.0.8.122:514"
-        tag: "zookeeperELK"
+#    logging:
+#      driver: syslog
+#      options:
+#        syslog-address: "tcp://10.0.8.122:514"
+#        tag: "zookeeperELK"
     volumes:
       - zkdata:/zk
       - /etc/localtime:/etc/localtime:ro

@@ -3,6 +3,9 @@ $(function() {
   (function () {
     $('a').on('mouseover',  function(event) {
       event.preventDefault();
+      var iClass = $(this).find('i').attr("class");
+      var u = "./img/" + iClass + ".png";
+      $(this).find('i').css("background-image","url("+u+")");
       $(this).find('i').show();
     });
     $('a').on('mouseout',  function(event) {
@@ -18,7 +21,7 @@ $(function() {
   })();
   // tab切换
   (function () {
-     $(".tab-nav li").on('click', function() {
+    $(".tab-nav li").on('click', function() {
       var index = $(this).index();
       $(this).addClass('actived').siblings().removeClass('actived');
       $('.content-wrap div').eq(index).show().siblings().hide();

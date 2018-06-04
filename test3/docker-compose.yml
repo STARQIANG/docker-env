@@ -2,7 +2,7 @@ version: '2.2'
 
 services:
   mysql:
-    image: mysql:5.6
+    image: mysql:5.7
     container_name: mysql
     ports:
       - "3306:3306"
@@ -14,11 +14,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=123456
     restart: always
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "3307:8080"
+#  adminer:
+#    image: adminer
+#    restart: always
+#    ports:
+#      - "3307:8080"
   redis:
     image: docker.io/redis:latest
     container_name: redis
@@ -32,31 +32,54 @@ services:
     restart: always
     ports:
       - "2181:2181"
-  dubbo-admin:
-    image: changwentao/dubboadmin:latest
-    container_name: dubbo-admin
-    restart: always
-    ports:
-      - "9050:8080"
-    links:
-      - zookeeper:zookeeper
-    depends_on:
-      - zookeeper
-  postgres:
-    image: postgres:9.6
-    container_name: postgres
     volumes:
-      - /var/lib/test3/postgres/data:/var/lib/postgresql/data
-      - /var/lib/test3/postgres/initdb:/docker-entrypoint-initdb.d
-      - /var/lib/test3/postgres/conf/postgresql.conf:/etc/postgresql/postgresql.conf
-      - /var/lib/test3/postgres/conf/pg_hba.conf:/etc/postgresql/pg_hba.conf
       - /etc/localtime:/etc/localtime:ro
-    ports:
-      - "5432:5432"
-    restart: always
+      - zk-data:/zk
     environment:
-      POSTGRES_PASSWORD: 123456
-    command: "postgres -c config_file=/etc/postgresql/postgresql.conf"
+      - TZ=Asia/Shanghai
+      - ZOO_MAX_CLIENT_CNXNS=600
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    restart: always
+#    ports:
+#      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://10.33.80.109:9092
+      KAFKA_ZOOKEEPER_CONNECT: 10.33.80.109:2181/kafka
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECTION_TIMEOUT_MS: 1000000
+      TZ: Asia/Shanghai
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - kafka-data:/kafka/
+      - /etc/localtime:/etc/localtime:ro
+#  dubbo-admin:
+#    image: changwentao/dubboadmin:latest
+#    container_name: dubbo-admin
+#    restart: always
+#    ports:
+#      - "9050:8080"
+#    links:
+#      - zookeeper:zookeeper
+#    depends_on:
+#      - zookeeper
+#  postgres:
+#    image: postgres:9.6
+#    container_name: postgres
+#    volumes:
+#      - /var/lib/test3/postgres/data:/var/lib/postgresql/data
+#      - /var/lib/test3/postgres/initdb:/docker-entrypoint-initdb.d
+#      - /var/lib/test3/postgres/conf/postgresql.conf:/etc/postgresql/postgresql.conf
+#      - /var/lib/test3/postgres/conf/pg_hba.conf:/etc/postgresql/pg_hba.conf
+#      - /etc/localtime:/etc/localtime:ro
+#    ports:
+#      - "5432:5432"
+#    restart: always
+#    environment:
+#      POSTGRES_PASSWORD: 123456
+#    command: "postgres -c config_file=/etc/postgresql/postgresql.conf"
   filebeat:
     image: registry.cn-beijing.aliyuncs.com/yangzhenwei/filebeat:6.1.0
     container_name: filebeat
@@ -64,5 +87,9 @@ services:
     volumes:
       - /root/logs:/usr/share/filebeat/logs
       - /var/lib/test3/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+volumes:
+  kafka-data:
+  zk-data:
+
 
 

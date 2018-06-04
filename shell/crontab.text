@@ -2,3 +2,6 @@
 
 
 0 0  * * *    /opt/zhongjiaxin_env/shell/every_day_task.sh    >> /opt/logs/every_day_task.log 2>&1
+
+
+0 0  * * *    /opt/log-house.sh    >> /opt/log-house.log 2>&1

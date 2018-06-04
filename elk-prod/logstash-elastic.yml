@@ -17,25 +17,20 @@ services:
       - "xpack.monitoring.elasticsearch.password=zhongjiaxin.2017"
       - "xpack.monitoring.elasticsearch.ssl.ca=/usr/share/logstash/certs/ca/ca.crt"
       - "LS_JAVA_OPTS=-Xmx1g"
-    extra_hosts:
-      - "kafka.zhongjiaxin.com:10.0.8.210"
+      - TZ=Asia/Shanghai
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
     deploy:
       resources:
         limits:
           cpus: '2'
           memory: 2048M
-      mode: global
-      endpoint_mode: dnsrr
-      placement:
-        constraints:
-          - node.labels.logstash == logstash
+      mode: replicated
+      replicas: 3
       restart_policy:
         condition: on-failure
     ports:
-      - target: 5044
-        published: 5044
-        protocol: tcp
-        mode: host
+      - "5044:5044"
     networks:
       - esnet
     configs:

@@ -1,7 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d5fe935-3909-4ce6-99ef-499248ee9bff" name="默认的" comment="" />
+    <list default="true" id="9d5fe935-3909-4ce6-99ef-499248ee9bff" name="默认的" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/cluster/kafka/docker-compose.yml" afterPath="$PROJECT_DIR$/cluster/kafka/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/cluster/nginx-proxy/nginx-proxy.conf" afterPath="$PROJECT_DIR$/cluster/nginx-proxy/nginx-proxy.conf" />
+      <change beforePath="$PROJECT_DIR$/common/docker-compose.yml" afterPath="$PROJECT_DIR$/common/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/common/java/Dockerfile" afterPath="$PROJECT_DIR$/common/java/Dockerfile" />
+      <change beforePath="$PROJECT_DIR$/dev/docker-compose.yml" afterPath="$PROJECT_DIR$/dev/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/dev1/docker-compose.yml" afterPath="$PROJECT_DIR$/dev1/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/dev1/mysql/my.cnf" afterPath="$PROJECT_DIR$/dev1/mysql/my.cnf" />
+      <change beforePath="$PROJECT_DIR$/dev2/docker-compose.yml" afterPath="$PROJECT_DIR$/dev2/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/dev2/mysql/my.cnf" afterPath="$PROJECT_DIR$/dev2/mysql/my.cnf" />
+      <change beforePath="$PROJECT_DIR$/dev3/docker-compose.yml" afterPath="$PROJECT_DIR$/dev3/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/dev3/mysql/my.cnf" afterPath="$PROJECT_DIR$/dev3/mysql/my.cnf" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/docker-elastic-bak.yml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/docker-elastic.yml" afterPath="$PROJECT_DIR$/elk-prod/docker-elastic.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/docker-kafka.yml" afterPath="$PROJECT_DIR$/elk-prod/docker-kafka.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/docker-kibana.yml" afterPath="$PROJECT_DIR$/elk-prod/docker-kibana.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/docker-zookeeper.yml" afterPath="$PROJECT_DIR$/elk-prod/docker-zookeeper.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/elasticsearch/elasticsearch.yml" afterPath="$PROJECT_DIR$/elk-prod/elasticsearch/elasticsearch.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/es_proxy/nginx.conf" afterPath="$PROJECT_DIR$/elk-prod/es_proxy/nginx.conf" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/filebeat-stack.yml" afterPath="$PROJECT_DIR$/elk-prod/filebeat-stack.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/filebeat/filebeat.yml" afterPath="$PROJECT_DIR$/elk-prod/filebeat/filebeat.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/kafka-log.yml" afterPath="$PROJECT_DIR$/elk-prod/kafka-log.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/kibana/kibana.yml" afterPath="$PROJECT_DIR$/elk-prod/kibana/kibana.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/logstash-elastic.yml" afterPath="$PROJECT_DIR$/elk-prod/logstash-elastic.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/logstash-syslog.yml" afterPath="$PROJECT_DIR$/elk-prod/logstash-syslog.yml" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/logstash/logstash.conf" afterPath="$PROJECT_DIR$/elk-prod/logstash/logstash.conf" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/logstash/logstash.conf_bak1" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk-prod/logstash/logstash_syslog.conf" afterPath="$PROJECT_DIR$/elk-prod/logstash/logstash_syslog.conf" />
+      <change beforePath="$PROJECT_DIR$/elk/doc/wendang1.md" afterPath="$PROJECT_DIR$/elk/doc/wendang1.md" />
+      <change beforePath="$PROJECT_DIR$/elk/docker-compose.yml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/docker-elastic.yml" afterPath="$PROJECT_DIR$/elk/docker-elastic.yml" />
+      <change beforePath="$PROJECT_DIR$/elk/docker-kafka.yml" afterPath="$PROJECT_DIR$/elk/docker-kafka.yml" />
+      <change beforePath="$PROJECT_DIR$/elk/docker-zookeeper.yml" afterPath="$PROJECT_DIR$/elk/docker-zookeeper.yml" />
+      <change beforePath="$PROJECT_DIR$/elk/elasticsearch/elasticsearch.yml" afterPath="$PROJECT_DIR$/elk/elasticsearch/elasticsearch.yml" />
+      <change beforePath="$PROJECT_DIR$/elk/es_proxy/nginx.conf" afterPath="$PROJECT_DIR$/elk/es_proxy/nginx.conf" />
+      <change beforePath="$PROJECT_DIR$/elk/filebeat/filebeat.yml" afterPath="$PROJECT_DIR$/elk/filebeat/filebeat.yml" />
+      <change beforePath="$PROJECT_DIR$/elk/kibana/kibana.yml" afterPath="$PROJECT_DIR$/elk/kibana/kibana.yml" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/Filebeat-nginx-logs.json" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/docker-compose.yml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/logstash.conf" afterPath="$PROJECT_DIR$/elk/logstash/logstash.conf" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/logstash.json" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/pipeline/logstash-app.conf" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/pipeline/logstash.conf" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/settings/jvm.options" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/settings/log4j2.properties" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/settings/logstash.yml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/settings/pipelines.yml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/elk/logstash/settings/startup.options" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/.gitignore" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/asset-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/basic-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/basic-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/channel-inner-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/channel-out-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/check_service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/common-platform-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/contract-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/lms-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/message-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/mortgage-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/mortgage-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/outer-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/outer-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/outnet-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/pv-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/quartz-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/risk-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/rule-engine-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/rules-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/start-stop.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/user-service.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/user-web.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/wechat-hunter.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/wechat-neiwei.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/jenkins_sh/wechat-waiwei.sh" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/prod/filebeat-stack.yml" afterPath="$PROJECT_DIR$/prod/filebeat-stack.yml" />
+      <change beforePath="$PROJECT_DIR$/prod/filebeat/filebeat.yml" afterPath="$PROJECT_DIR$/prod/filebeat/filebeat.yml" />
+      <change beforePath="$PROJECT_DIR$/prod/nginx-stack.yml" afterPath="$PROJECT_DIR$/prod/nginx-stack.yml" />
+      <change beforePath="$PROJECT_DIR$/prod/nginx/nginx.conf" afterPath="$PROJECT_DIR$/prod/nginx/nginx.conf" />
+      <change beforePath="$PROJECT_DIR$/real/docker-compose.yml" afterPath="$PROJECT_DIR$/real/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/real/mysql/my.cnf" afterPath="$PROJECT_DIR$/real/mysql/my.cnf" />
+      <change beforePath="$PROJECT_DIR$/real/nginx/nginx.conf" afterPath="$PROJECT_DIR$/real/nginx/nginx.conf" />
+      <change beforePath="$PROJECT_DIR$/real/nginx/reverse-proxy.bak" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/real/nginx/reverse-proxy.conf" afterPath="$PROJECT_DIR$/real/nginx/reverse-proxy.conf" />
+      <change beforePath="$PROJECT_DIR$/service/jenkins_dev/alert/docker-compose.yml" afterPath="$PROJECT_DIR$/service/jenkins_dev/alert/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/service/jenkins_dev/docker-compose.yml" afterPath="$PROJECT_DIR$/service/jenkins_dev/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/service/online/dns-prod/dnsmasqhosts" afterPath="$PROJECT_DIR$/service/online/dns-prod/dnsmasqhosts" />
+      <change beforePath="$PROJECT_DIR$/service/online/docker-compose.yml" afterPath="$PROJECT_DIR$/service/online/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/service/online/nginx/nginx.conf" afterPath="$PROJECT_DIR$/service/online/nginx/nginx.conf" />
+      <change beforePath="$PROJECT_DIR$/service/online/nginx/reverse-proxy.conf" afterPath="$PROJECT_DIR$/service/online/nginx/reverse-proxy.conf" />
+      <change beforePath="$PROJECT_DIR$/service/online/zhitongche/css/css.css" afterPath="$PROJECT_DIR$/service/online/zhitongche/css/css.css" />
+      <change beforePath="$PROJECT_DIR$/service/online/zhitongche/index.html" afterPath="$PROJECT_DIR$/service/online/zhitongche/index.html" />
+      <change beforePath="$PROJECT_DIR$/service/online/zhitongche/js/js.js" afterPath="$PROJECT_DIR$/service/online/zhitongche/js/js.js" />
+      <change beforePath="$PROJECT_DIR$/shell/crontab.text" afterPath="$PROJECT_DIR$/shell/crontab.text" />
+      <change beforePath="$PROJECT_DIR$/shell/environment.sh" afterPath="$PROJECT_DIR$/shell/environment.sh" />
+      <change beforePath="$PROJECT_DIR$/test1/docker-compose.yml" afterPath="$PROJECT_DIR$/test1/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/test1/mysql/my.cnf" afterPath="$PROJECT_DIR$/test1/mysql/my.cnf" />
+      <change beforePath="$PROJECT_DIR$/test2/docker-compose.yml" afterPath="$PROJECT_DIR$/test2/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/test2/mysql/my.cnf" afterPath="$PROJECT_DIR$/test2/mysql/my.cnf" />
+      <change beforePath="$PROJECT_DIR$/test3/docker-compose.yml" afterPath="$PROJECT_DIR$/test3/docker-compose.yml" />
+      <change beforePath="$PROJECT_DIR$/test3/mysql/my.cnf" afterPath="$PROJECT_DIR$/test3/mysql/my.cnf" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,8 +142,22 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="ProjectPane" />
       <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="docker-env" type="b2602c69:ProjectViewProjectNode" />
+              <item name="docker-env" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="docker-env" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zhongjiaxin_env" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -63,6 +179,9 @@
   <component name="ShelveChangesManager" show_recycled="false">
     <option name="remove_strategy" value="false" />
   </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="9d5fe935-3909-4ce6-99ef-499248ee9bff" name="默认的" comment="" />
@@ -76,18 +195,19 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25718608" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="调试" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="运行" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26096824" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -97,6 +217,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">

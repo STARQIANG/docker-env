@@ -13,6 +13,9 @@ services:
     memswap_limit: 5G
     cpu_count: 4
     cpu_quota: 400000
+    environment:
+      - TZ=Asia/Shanghai
+      - JAVA_OPTS=-Duser.timezone=Asia/Shanghai
     blkio_config:
       weight: 300
       device_read_bps:
@@ -54,6 +57,17 @@ services:
     restart: always
 
 
+#docker run -d --name jenkins_node -p "50022:22" \
+#-v /var/lib/jenkins_dev/maven/repository:/root/.m2/repository \
+#-v /var/lib/jenkins_dev/maven:/usr/share/maven/conf \
+#-v /var/lib/jenkins_dev/maven/gradle:/root/.gradle \
+#-v /root/service:/root/service \
+#-v /var/run/docker.sock:/var/run/docker.sock:ro \
+#-v /usr/bin/docker:/usr/bin/docker \
+#-v /usr/lib64/libltdl.so.7:/usr/lib64/libltdl.so.7:ro \
+#--restart="always"  \
+#reg.zhongjiaxin.com/library/centos7-maven:latest /usr/bin/supervisord
 
 
-
+# 在【系统管理】-【脚本命令行】里运行
+# System.setProperty('org.apache.commons.jelly.tags.fmt.timeZone', 'Asia/Shanghai')

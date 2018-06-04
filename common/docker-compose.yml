@@ -10,3 +10,24 @@ services:
     zookeeper:
       build: ./zookeeper
       image: reg.zhongjiaxin.com/library/zookeeper
+    nginxLdap:
+      build: ./nginx-ldap
+      image: reg.zhongjiaxin.com/library/nginx-ldap
+    elasticsearch:
+      build: ./elasticsearch
+      image: reg.zhongjiaxin.com/library/elasticsearch:6.1.0
+    ttyjs:
+      build: ./ttyjs
+      image: reg.zhongjiaxin.com/library/ttyjs:latest
+    maven:
+      build: ./maven
+      image: reg.zhongjiaxin.com/library/centos7-maven:latest
+    tools:
+      build: ./centos-tools
+      image: reg.zhongjiaxin.com/library/centos7-tools:latest
+    centos7-jdk:
+      build: ./centos7-jdk
+      image: reg.zhongjiaxin.com/library/centos7-jdk:8
+    jenkins:
+      build: ./jenkins
+      image: reg.zhongjiaxin.com/library/jenkins:latest

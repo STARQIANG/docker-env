@@ -1,15 +1,12 @@
 cluster.name: "zhongjiaxin-es-prod"
 xpack.license.self_generated.type: trial
-gateway.recover_after_nodes: 5
-indices.recovery.max_bytes_per_sec: 100mb
 discovery.zen.fd.ping_timeout: 120s
 discovery.zen.fd.ping_retries: 6
 discovery.zen.fd.ping_interval: 30s
 discovery.zen.minimum_master_nodes: 2
 discovery.zen.commit_timeout: 60s
 discovery.zen.publish_timeout: 60s
-discovery.zen.ping.unicast.hosts: ["es01"]
-node.max_local_storage_nodes: 5
+discovery.zen.ping.unicast.hosts: ["es01:9300","es02:9300","es03:9300"]
 network.host: _eth0_
 transport.host: _eth0_
 xpack.security.enabled: true

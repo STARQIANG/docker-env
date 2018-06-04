@@ -305,3 +305,6 @@ if ( path =~ /.*\/[0-9]*$/) {
      return path;
 }
 def path = doc['url.keyword'].value; if ( path =~ /.*\/[0-9]*$/) {  int lastSlashIndex = path.lastIndexOf('/'); if (lastSlashIndex > 0) { return path.substring(0,(lastSlashIndex+1));} return path; } else { return path;}
+
+
+

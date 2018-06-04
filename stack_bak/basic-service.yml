@@ -1,0 +1,47 @@
+version: '3.4'
+
+networks:
+  app:
+    external:
+        name: host
+services:
+  basic-service:
+    image: reg.zhongjiaxin.com/mortgage/basic-service:${BRANCH_NAME_TAG}
+    hostname: basic-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20802 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20802
+        published: 20802
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs

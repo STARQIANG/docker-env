@@ -1,0 +1,104 @@
+version: '3.3'
+
+networks:
+   host:
+     external: true
+volumes:
+  kafka-data:
+  zk-data:
+  redis-data:
+  mysql-data:
+configs:
+   mysql_config:
+     file: ./mysql/my.cnf
+services:
+  zookeeper:
+    image: zookeeper
+    hostname: zookeeper
+    environment:
+      - TZ=Asia/Shanghai
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
+      placement:
+        constraints:
+          - node.lables.zookeeper == zookeeper
+    volumes:
+      - zk-data:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - host
+  kafka:
+    image: wurstmeister/kafka
+    hostname: kafka
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
+      placement:
+        constraints:
+          - node.lables.kafka == kafka
+    environment:
+      KAFKA_LISTENERS: PLAINTEXT://:9092
+      KAFKA_ZOOKEEPER_CONNECT: 127.0.0.1:2181/kafka
+      TZ: Asia/Shanghai
+    volumes:
+      - kafka-data:/kafka/
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - host
+  redis:
+    image: redis
+    hostname: redis
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
+      placement:
+        constraints:
+          - node.lables.redis == redis
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - redis-data:/data
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - host
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+      - TZ=Asia/Shanghai
+    configs:
+      - source: mysql_config
+        target: /etc/mysql/conf.d/my.cnf
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 120s
+      placement:
+        constraints:
+          - node.lables.mysql == mysql
+    networks:
+          - host

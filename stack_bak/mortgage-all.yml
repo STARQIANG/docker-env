@@ -1,0 +1,407 @@
+version: '3.4'
+
+networks:
+  app:
+    external:
+        name: host
+services:
+  asset-service:
+    image: reg.zhongjiaxin.com/mortgage/asset-service:${BRANCH_NAME_TAG}
+    hostname: asset-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20801 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20801
+        published: 20801
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  basic-service:
+    image: reg.zhongjiaxin.com/mortgage/basic-service:${BRANCH_NAME_TAG}
+    hostname: basic-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20802 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20802
+        published: 20802
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  contract-service:
+    image: reg.zhongjiaxin.com/mortgage/contract-service:${BRANCH_NAME_TAG}
+    hostname: contract-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20804 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20804
+        published: 20804
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  mortgage-service:
+    image: reg.zhongjiaxin.com/mortgage/mortgage-service:${BRANCH_NAME_TAG}
+    hostname: mortgage-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20805 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20805
+        published: 20805
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  outer-service:
+    image: reg.zhongjiaxin.com/mortgage/outer-service:${BRANCH_NAME_TAG}
+    hostname: outer-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20808 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20808
+        published: 20808
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  user-service:
+    image: reg.zhongjiaxin.com/mortgage/user-service:${BRANCH_NAME_TAG}
+    hostname: user-service
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD-SHELL", "echo status | nc  -w 1 127.0.0.1 20810 || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 20810
+        published: 20810
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  basic-web:
+    image: reg.zhongjiaxin.com/mortgage/basic-web:${BRANCH_NAME_TAG}
+    hostname: basic-web
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8082/health"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 8082
+        published: 8082
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  mortgage-web:
+    image: reg.zhongjiaxin.com/mortgage/mortgage-web:${BRANCH_NAME_TAG}
+    hostname: mortgage-web
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 8080
+        published: 8080
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  outer-web:
+    image: reg.zhongjiaxin.com/mortgage/outer-web:${BRANCH_NAME_TAG}
+    hostname: outer-web
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8083/health"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 8083
+        published: 8083
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
+  user-web:
+    image: reg.zhongjiaxin.com/mortgage/user-web:${BRANCH_NAME_TAG}
+    hostname: user-web
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
+    deploy:
+      mode: replicated
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 3072M
+      placement:
+        constraints:
+          - node.labels.profiles == ${SPRING_PROFILES_ACTIVE}
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 5
+        window: 120s
+      update_config:
+        parallelism: 1
+        failure_action: rollback
+        max_failure_ratio: 0
+        delay: 10s
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8085/health"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    ports:
+      - target: 8085
+        published: 8085
+        protocol: tcp
+        mode: host
+    networks:
+       - app
+    volumes:
+       - /root/logs:/logs
