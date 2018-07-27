@@ -1,94 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9d5fe935-3909-4ce6-99ef-499248ee9bff" name="默认的" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/postgres/initdb/a_init-user-db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev/postgres/initdb/a_init-user-db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/postgres/initdb/a_init-user-db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/postgres/initdb/a_init-user-db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev1/postgres/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev1/postgres/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/postgres/data/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/postgres/data/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/postgres/data/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/postgres/data/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/postgres/initdb/a_init-user-db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/postgres/initdb/a_init-user-db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev2/postgres/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev2/postgres/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev3/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev3/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev3/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev3/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev3/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev3/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev3/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev3/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev3/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev3/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev3/postgres/initdb/a_init-user-db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/dev3/postgres/initdb/a_init-user-db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/filebeat/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/filebeat/filebeat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/nginx/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/nginx/reverse-proxy.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/nginx/reverse-proxy.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/postgres/initdb/a_init-user-db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/postgres/initdb/a_init-user-db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real/postgres/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real/postgres/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real2/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real2/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real2/filebeat/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real2/filebeat/filebeat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real2/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real2/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real2/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real2/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real2/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real2/nginx/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/real2/nginx/reverse-proxy.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/real2/nginx/reverse-proxy.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/asset-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/asset-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/basic-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/basic-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/basic-web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/basic-web.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/channel-inner-web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/channel-inner-web.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/contract-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/contract-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/mortgage-all.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/mortgage-all.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/mortgage-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/mortgage-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/mortgage-web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/mortgage-web.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/outer-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/outer-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/outer-web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/outer-web.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/user-service.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/user-service.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stack_bak/user-web.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/stack_bak/user-web.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/mysql/my.bak" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test/mysql/my.bak" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test-stack.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test/test-stack.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/filebeat/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/filebeat/filebeat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/mysql-slave/my-slave.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/mysql-slave/my-slave.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/mysql-slave/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/mysql-slave/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/postgres/initdb/a_init-user-db.sh" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/postgres/initdb/a_init-user-db.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test1/postgres/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test1/postgres/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test2/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2/filebeat/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test2/filebeat/filebeat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test2/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test2/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test2/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test2/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test3/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3/filebeat/filebeat.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test3/filebeat/filebeat.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test3/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test3/mysql/my.cnf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3/postgres/conf/pg_hba.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test3/postgres/conf/pg_hba.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test3/postgres/conf/postgresql.conf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test3/postgres/conf/postgresql.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test4/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test4/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test4/mysql/initdb/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test4/mysql/initdb/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test4/mysql/my.cnf" beforeDir="false" afterPath="$PROJECT_DIR$/zjx-text/test4/mysql/my.cnf" afterDir="false" />
-    </list>
+    <list default="true" id="9d5fe935-3909-4ce6-99ef-499248ee9bff" name="默认的" comment="默认的" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +10,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Dockerfile" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/common/nginx-ldap/Dockerfile">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2621" />
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -108,6 +29,7 @@
         <option value="$PROJECT_DIR$/filebeat.yml" />
         <option value="$PROJECT_DIR$/filebeat.sh" />
         <option value="$USER_HOME$/Desktop/filebeat.yml" />
+        <option value="$PROJECT_DIR$/kafka/docker-kafka.yml" />
       </list>
     </option>
   </component>
@@ -122,8 +44,8 @@
       <path value="$PROJECT_DIR$/common/ttyjs/tty/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="676" />
     <option name="width" value="697" />
     <option name="height" value="735" />
   </component>
@@ -179,10 +101,18 @@
       <option name="presentableId" value="Default" />
       <updated>1513923504482</updated>
     </task>
+    <task id="LOCAL-00001" summary="默认的">
+      <created>1532658114253</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1532658114253</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="14" side_tool="true" />
@@ -194,7 +124,7 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1913767" />
       <window_info anchor="bottom" id="Docker" order="12" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="5" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32996634" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3289256" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.24962178" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -245,21 +175,11 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="默认的" />
+    <option name="LAST_COMMIT_MESSAGE" value="默认的" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/prod/nginx/nginx.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="138" lean-forward="true" selection-start-line="138" selection-end-line="138" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/elk/elasticsearch/elasticsearch.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" selection-start-line="2" selection-end-line="8" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/elk/filebeat/filebeat-doc.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -517,6 +437,18 @@
     <entry file="file://$PROJECT_DIR$/zjx-text/stack_bak/asset-service.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-849" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kafka/docker-kafka.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2807">
+          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/nginx-ldap/Dockerfile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2621" />
       </provider>
     </entry>
   </component>
